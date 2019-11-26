@@ -5,6 +5,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.greedygame.android.agent.GreedyGameAgent
 import com.greedygames.sample.sdk8.R
@@ -24,16 +25,51 @@ class RectStoriesAdapter(private val greedyGameAgent: GreedyGameAgent, private v
     val data = listOf(
         ListItem(
             ItemTypes.CONTENT,
-            "https://source.unsplash.com/random/200x280"
+            "https://source.unsplash.com/random/360x250"
         ),
+
         ListItem(
-            ItemTypes.AD,
-            "float-4195"
+            ItemTypes.CONTENT,
+            "https://source.unsplash.com/random/360x250"
         ),
         ListItem(
             ItemTypes.CONTENT,
-            "https://source.unsplash.com/random/200x280"
+            "https://source.unsplash.com/random/360x250"
+        ),
+
+        ListItem(
+            ItemTypes.CONTENT,
+            "https://source.unsplash.com/random/360x250"
+        ),
+        ListItem(
+            ItemTypes.AD,
+            "https://source.unsplash.com/random/360x250",
+            "float-4342"
+        ),
+        ListItem(
+            ItemTypes.CONTENT,
+            "https://source.unsplash.com/random/360x250"
+        ),
+
+        ListItem(
+            ItemTypes.CONTENT,
+            "https://source.unsplash.com/random/360x250"
+        ),
+        ListItem(
+            ItemTypes.CONTENT,
+            "https://source.unsplash.com/random/360x250"
+        ),
+
+        ListItem(
+            ItemTypes.CONTENT,
+            "https://source.unsplash.com/random/360x250"
+        ),
+        ListItem(
+            ItemTypes.AD,
+            "https://source.unsplash.com/random/360x250",
+            "float-4342"
         )
+
     )
 
     private lateinit var mContext: Context;
@@ -59,7 +95,7 @@ class RectStoriesAdapter(private val greedyGameAgent: GreedyGameAgent, private v
     inner class ViewHolder(private val view: View): RecyclerView.ViewHolder(view){
         fun bind(item: ListItem){
             Picasso.with(mContext)
-                .load("https://source.unsplash.com/random/200x280")
+                .load(item.value)
                 .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
                 .networkPolicy(NetworkPolicy.NO_CACHE, NetworkPolicy.NO_STORE)
                 .transform(RoundedCornersTransformation(10,0))
@@ -67,11 +103,11 @@ class RectStoriesAdapter(private val greedyGameAgent: GreedyGameAgent, private v
 
             when(item.type){
                 ItemTypes.CONTENT -> {
-                    view.adUnit.setImageBitmap(null)
+                    view.adUnit.setImageDrawable(ContextCompat.getDrawable(mContext,R.drawable.user_profile))
                     view.adUnit.setOnClickListener(null)
                 }
                 ItemTypes.AD -> {
-                    view.adUnit.loadWithRoundedCorners(item.value,greedyGameAgent,mContext,activity)
+                    view.adUnit.loadWithRoundedCorners(item.adValue,greedyGameAgent,mContext,activity)
                     view.adUnit.setOnClickListener {
                         onClickListener(item.value)
                     }

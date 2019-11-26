@@ -108,11 +108,12 @@ class UtilityActivity : BaseActivity() {
 
         })
         //firstScaleAnimation.start()
-        if(isCardFlipped)
+        isCardFlipped  = !isCardFlipped
+        if(!isCardFlipped)
             firstRotateAnimation.start()
         else{
             secondRotateAnimation.start()
         }
-        isCardFlipped  = !isCardFlipped
+
     }
 }

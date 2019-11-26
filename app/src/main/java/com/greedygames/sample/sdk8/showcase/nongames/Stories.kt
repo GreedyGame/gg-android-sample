@@ -1,5 +1,7 @@
 package com.greedygames.sample.sdk8.showcase.nongames
 
+import android.animation.ObjectAnimator
+import android.animation.ValueAnimator
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
@@ -7,6 +9,7 @@ import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -119,7 +122,7 @@ fun ImageView.loadAd(unitId:String, greedyGameAgent: GreedyGameAgent,context: Co
             if(useCircularTransform) {
                 picasso.transform(CircularTransform())
             }
-            picasso.into(this)
+            picasso.noFade().into(this)
         }
     }
 
@@ -144,16 +147,43 @@ class ShowcaseListAdapter(private val greedyGameAgent: GreedyGameAgent,private v
     val data = listOf(
         ListItem(
             ItemTypes.CONTENT,
-            "https://source.unsplash.com/random/360x130"
+            R.drawable.user_profile.toString()
+        ),
+        ListItem(
+            ItemTypes.CONTENT,
+            R.drawable.user_profile.toString()
+        ),ListItem(
+            ItemTypes.CONTENT,
+            R.drawable.user_profile.toString()
+        ),ListItem(
+            ItemTypes.CONTENT,
+            R.drawable.user_profile.toString()
         ),
         ListItem(
             ItemTypes.AD,
+            R.drawable.user_profile.toString(),
             "float-4191"
         ),
         ListItem(
             ItemTypes.CONTENT,
-            "https://source.unsplash.com/random/360x130"
+            R.drawable.user_profile.toString()
+        ),
+        ListItem(
+            ItemTypes.CONTENT,
+            R.drawable.user_profile.toString()
+        ),ListItem(
+            ItemTypes.CONTENT,
+            R.drawable.user_profile.toString()
+        ),ListItem(
+            ItemTypes.CONTENT,
+            R.drawable.user_profile.toString()
+        ),
+        ListItem(
+            ItemTypes.AD,
+            R.drawable.user_profile.toString(),
+            "float-4191"
         )
+
     )
 
     private lateinit var mContext:Context;
@@ -167,13 +197,13 @@ class ShowcaseListAdapter(private val greedyGameAgent: GreedyGameAgent,private v
     }
 
     override fun getItemCount(): Int {
-        return 15
+        return data.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val newPos = position%(data.size-1)
-        if(newPos < data.size)
-            holder.bind(data[newPos])
+//        val newPos = position%(data.size-1)
+//        if(newPos < data.size)
+            holder.bind(data[position])
     }
 
     inner class ViewHolder(private val view:View):RecyclerView.ViewHolder(view){
@@ -181,27 +211,40 @@ class ShowcaseListAdapter(private val greedyGameAgent: GreedyGameAgent,private v
             when(item.type){
                 ItemTypes.CONTENT -> {
                     Picasso.with(mContext)
-                        .load("https://source.unsplash.com/random/360*130")
+                        .load(item.value.toInt())
                         .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
-                        .transform(CircularTransform())
+//                        .transform(CircularTransform())
                         .networkPolicy(NetworkPolicy.NO_CACHE, NetworkPolicy.NO_STORE)
+                        .placeholder(R.drawable.user_profile)
+                        .noFade()
                         .into(view.adUnit)
                     view.adUnit.setOnClickListener(null)
+                    view.highlighter.visibility = View.GONE
                 }
                 ItemTypes.AD -> {
-                    view.adUnit.loadAd(item.value,greedyGameAgent,mContext,activity,true);
+                    view.highlighter.visibility = View.VISIBLE
+                    rotate(view.highlighter)
+                    view.adUnit.loadAd(item.adValue,greedyGameAgent,mContext,activity,true);
                     view.adUnit.setOnClickListener {
                         onClickListener(item.value)
                     }
                 }
             }
         }
+
+        private fun rotate(view:ImageView){
+            val rotateAnimator = ObjectAnimator.ofFloat(view,"rotation",0f,360f)
+            rotateAnimator.duration = 2000;
+            rotateAnimator.repeatCount  = Animation.INFINITE
+            rotateAnimator.repeatMode = ValueAnimator.RESTART
+            rotateAnimator.start()
+        }
     }
 
 }
 
 data class ListItem(
-    val type: ItemTypes, val value:String
+    val type: ItemTypes, val value:String,val adValue:String = ""
 )
 
 enum class ItemTypes{
