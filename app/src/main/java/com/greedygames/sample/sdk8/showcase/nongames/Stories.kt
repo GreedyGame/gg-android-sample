@@ -114,7 +114,8 @@ fun String.toast(context:Context){
 
 fun ImageView.loadAd(unitId:String, greedyGameAgent: GreedyGameAgent,context: Context,activity:Activity,useCircularTransform:Boolean = false){
     if(unitId.isNotEmpty()){
-        val adPath = greedyGameAgent.getPath(unitId);
+        val adPath = greedyGameAgent.getPath(unitId)
+        ;
         if(adPath.isNotEmpty()){
             val adFile = File(adPath)
             val picasso = Picasso.with(context).load(adFile)
@@ -162,7 +163,7 @@ class ShowcaseListAdapter(private val greedyGameAgent: GreedyGameAgent,private v
         ListItem(
             ItemTypes.AD,
             R.drawable.user_profile.toString(),
-            "float-4191"
+            "float-4345"
         ),
         ListItem(
             ItemTypes.CONTENT,
@@ -181,7 +182,7 @@ class ShowcaseListAdapter(private val greedyGameAgent: GreedyGameAgent,private v
         ListItem(
             ItemTypes.AD,
             R.drawable.user_profile.toString(),
-            "float-4191"
+            "float-4345"
         )
 
     )
@@ -242,7 +243,6 @@ class ShowcaseListAdapter(private val greedyGameAgent: GreedyGameAgent,private v
     }
 
 }
-
 data class ListItem(
     val type: ItemTypes, val value:String,val adValue:String = ""
 )

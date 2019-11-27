@@ -12,16 +12,11 @@ open class BaseActivity : AppCompatActivity() {
     
     fun initAds(){
         mGreedyGameAgent = GreedyGameAgent.Builder(this)
-            .setGameId("25366126")
+            .setGameId("66081223")
             .addUnitList(listOf(
-                "float-4196",
-                "unit-4296",
-                "float-4191",
-                "float-4192",
-                "float-4194",
-                "float-4195",
-                "float-4342",
-                "float-4201"))
+                "float-4343",
+                "float-4344",
+                "float-4345"))
             .enableAdmob(true)
             .withAgentListener(mBaseCampaignStateListener)
             .build()

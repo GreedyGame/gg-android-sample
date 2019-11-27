@@ -17,7 +17,6 @@ import com.squareup.picasso.NetworkPolicy
 import com.squareup.picasso.Picasso
 import jp.wasabeef.picasso.transformations.RoundedCornersTransformation
 import kotlinx.android.synthetic.main.rect_stories_item.view.*
-import kotlinx.android.synthetic.main.showcase_item.view.adUnit
 
 class RectStoriesAdapter(private val greedyGameAgent: GreedyGameAgent, private val activity: Activity, private val onClickListener:(unitId:String)->Unit):
     RecyclerView.Adapter<RectStoriesAdapter.ViewHolder>(){
@@ -44,7 +43,7 @@ class RectStoriesAdapter(private val greedyGameAgent: GreedyGameAgent, private v
         ListItem(
             ItemTypes.AD,
             "https://source.unsplash.com/random/360x250",
-            "float-4342"
+            "float-4343"
         ),
         ListItem(
             ItemTypes.CONTENT,
@@ -67,7 +66,7 @@ class RectStoriesAdapter(private val greedyGameAgent: GreedyGameAgent, private v
         ListItem(
             ItemTypes.AD,
             "https://source.unsplash.com/random/360x250",
-            "float-4342"
+            "float-4343"
         )
 
     )
@@ -101,16 +100,19 @@ class RectStoriesAdapter(private val greedyGameAgent: GreedyGameAgent, private v
                 .transform(RoundedCornersTransformation(10,0))
                 .into(view.content)
 
+            view.profileImage.setImageDrawable(ContextCompat.getDrawable(mContext,R.drawable.user_profile))
+            view.profileImage.setOnClickListener(null)
+
             when(item.type){
-                ItemTypes.CONTENT -> {
-                    view.adUnit.setImageDrawable(ContextCompat.getDrawable(mContext,R.drawable.user_profile))
-                    view.adUnit.setOnClickListener(null)
-                }
+//                ItemTypes.CONTENT -> {
+//                    view.profileImage.setImageDrawable(ContextCompat.getDrawable(mContext,R.drawable.user_profile))
+//                    view.profileImage.setOnClickListener(null)
+//                }
                 ItemTypes.AD -> {
+//                    view.profileImage.setImageDrawable(ContextCompat.getDrawable(mContext,R.drawable.user_profile))
+//                    view.profileImage.setOnClickListener(null)
                     view.adUnit.loadWithRoundedCorners(item.adValue,greedyGameAgent,mContext,activity)
-                    view.adUnit.setOnClickListener {
-                        onClickListener(item.value)
-                    }
+
                 }
             }
         }

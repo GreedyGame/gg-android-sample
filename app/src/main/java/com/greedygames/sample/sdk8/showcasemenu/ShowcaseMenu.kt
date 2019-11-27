@@ -12,6 +12,7 @@ import com.greedygames.sample.sdk8.showcase.nongames.StoriesActivity
 import com.greedygames.sample.sdk8.showcase.nongames.TilesActivity
 import com.greedygames.sample.sdk8.showcase.nongames.UtilityActivity
 import com.greedygames.sample.sdk8.showcase.nongames.fullapp.MusicPlayer
+import com.greedygames.sample.sdk8.showcase.nongames.toast
 import kotlinx.android.synthetic.main.activity_showcase_menu.*
 
 class ShowcaseMenu : BaseActivity() {
@@ -52,7 +53,8 @@ class ShowcaseMenu : BaseActivity() {
 
     inner class ShowcaseListener:CampaignStateListener{
         override fun onUnavailable() {
-            
+            loader.visibility = View.INVISIBLE
+            "Ads are not loaded".toast(this@ShowcaseMenu)
         }
 
         override fun onAvailable(p0: String?) {

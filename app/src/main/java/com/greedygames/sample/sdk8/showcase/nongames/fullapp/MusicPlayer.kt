@@ -13,6 +13,7 @@ import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.DecelerateInterpolator
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -22,13 +23,16 @@ import com.greedygames.sample.sdk8.R
 import com.greedygames.sample.sdk8.showcase.nongames.ShowcaseListAdapter
 import com.greedygames.sample.sdk8.showcase.nongames.adapters.RectStoriesAdapter
 import com.greedygames.sample.sdk8.showcase.nongames.loadAd
+import kotlinx.android.synthetic.main.activity_music_player.*
 import kotlinx.android.synthetic.main.activity_music_player_content.*
 import kotlinx.android.synthetic.main.activity_utility.*
 import kotlinx.android.synthetic.main.exit_dialouge_header.view.*
+import kotlin.math.abs
 
 
 class MusicPlayer : AppCompatActivity() {
     private val playerSheetController  = PlayerSheetController()
+    private var mSheetBehavior:BottomSheetBehavior<ConstraintLayout>? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_music_player)
@@ -39,6 +43,14 @@ class MusicPlayer : AppCompatActivity() {
         setupPlayerSheet()
         setupStoryList()
         setRecommendationList()
+        setupFAB()
+    }
+
+    private fun setupFAB(){
+        moreSongsButton.setOnClickListener {
+            frame.visibility = View.VISIBLE
+            supportFragmentManager.beginTransaction().replace(R.id.frame,MoreSongsFragment()).addToBackStack("MoreSongsFragment").commit()
+        }
     }
 
     private fun setupStoryList(){
@@ -60,18 +72,20 @@ class MusicPlayer : AppCompatActivity() {
 
     private fun setupPlayerSheet(){
 
-        val sheetBehavior = BottomSheetBehavior.from(playerBottomSheet)
-        sheetBehavior.peekHeight = TypedValue.applyDimension(
+        mSheetBehavior = BottomSheetBehavior.from(playerBottomSheet)
+        mSheetBehavior?.peekHeight = TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_PX,140f,
             DisplayMetrics()
         ).toInt()
         playerTab.setOnClickListener {
-            sheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+            mSheetBehavior?.state = BottomSheetBehavior.STATE_EXPANDED
         }
-        sheetBehavior.setBottomSheetCallback(object: BottomSheetBehavior.BottomSheetCallback(){
+        mSheetBehavior?.setBottomSheetCallback(object: BottomSheetBehavior.BottomSheetCallback(){
             var mCurrentPos = 0f
             override fun onSlide(p0: View, currentPosition: Float) {
                 mCurrentPos = currentPosition
+                moreSongsButton.alpha = abs(1-currentPosition)
+                moreSongsButton.isEnabled = 1f==(1-currentPosition)
             }
 
             override fun onStateChanged(p0: View, state: Int) {
@@ -106,15 +120,28 @@ class MusicPlayer : AppCompatActivity() {
         slideDownAnimator.start()
     }
 
+
     override fun onBackPressed() {
-        showExitAlertDialog(){
-            super.onBackPressed()
+        if(supportFragmentManager.backStackEntryCount == 0 && mSheetBehavior?.state == BottomSheetBehavior.STATE_COLLAPSED) {
+            showExitAlertDialog {
+                super.onBackPressed()
+            }
         }
+        else{
+            if(mSheetBehavior?.state == BottomSheetBehavior.STATE_EXPANDED)
+                mSheetBehavior?.state = BottomSheetBehavior.STATE_COLLAPSED
+            else {
+                frame.visibility = View.GONE
+                super.onBackPressed()
+
+            }
+        }
+
     }
 
     private fun showExitAlertDialog(callback:()->Unit){
         val customTitle = layoutInflater.inflate(R.layout.exit_dialouge_header,null,false)
-        customTitle.adUnit.loadAd("float-4201",BaseActivity.mGreedyGameAgent,this,this)
+        customTitle.adUnit.loadAd("float-4344",BaseActivity.mGreedyGameAgent,this,this)
         val exitDialog  = AlertDialog.Builder(this)
             .setCustomTitle(customTitle)
             .setPositiveButton("No",null)
@@ -171,7 +198,7 @@ class MusicPlayer : AppCompatActivity() {
                 Log.d("JUDE-ANI","Animated Fraction ${it.animatedValue}, ${it.animatedFraction}")
                 if(it.animatedFraction > 50f)
                 albumArt.loadAd(
-                    "float-4191",
+                    "float-4343",
                     BaseActivity.mGreedyGameAgent,
                     this@MusicPlayer,
                     this@MusicPlayer,
@@ -207,7 +234,7 @@ class MusicPlayer : AppCompatActivity() {
 
                 override fun onAnimationEnd(animation: Animator?) {
                     albumArt.loadAd(
-                        "float-4191",
+                        "float-4343",
                         BaseActivity.mGreedyGameAgent,
                         this@MusicPlayer,
                         this@MusicPlayer,
