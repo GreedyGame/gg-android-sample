@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.greedygame.android.agent.GreedyGameAgent
+import com.greedygames.sample.sdk8.BaseActivity
 import com.greedygames.sample.sdk8.R
 import com.greedygames.sample.sdk8.showcase.nongames.ItemTypes
 import com.greedygames.sample.sdk8.showcase.nongames.ListItem
@@ -112,6 +113,9 @@ class RectStoriesAdapter(private val greedyGameAgent: GreedyGameAgent, private v
 //                    view.profileImage.setImageDrawable(ContextCompat.getDrawable(mContext,R.drawable.user_profile))
 //                    view.profileImage.setOnClickListener(null)
                     view.adUnit.loadWithRoundedCorners(item.adValue,greedyGameAgent,mContext,activity)
+                    view.adUnit.setOnClickListener {
+                        BaseActivity.mGreedyGameAgent.showUII(item.adValue)
+                    }
 
                 }
             }

@@ -227,7 +227,7 @@ class ShowcaseListAdapter(private val greedyGameAgent: GreedyGameAgent,private v
                     rotate(view.highlighter)
                     view.adUnit.loadAd(item.adValue,greedyGameAgent,mContext,activity,true);
                     view.adUnit.setOnClickListener {
-                        onClickListener(item.value)
+                        onClickListener(item.adValue)
                     }
                 }
             }

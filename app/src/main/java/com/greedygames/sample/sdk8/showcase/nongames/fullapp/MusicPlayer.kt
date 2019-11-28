@@ -59,7 +59,7 @@ class MusicPlayer : AppCompatActivity() {
             BaseActivity.mGreedyGameAgent,
             this
         ) { adUnitId ->
-            BaseActivity.mGreedyGameAgent.showUII("unit-4296")
+            BaseActivity.mGreedyGameAgent.showUII(adUnitId)
         }
     }
 
@@ -204,6 +204,9 @@ class MusicPlayer : AppCompatActivity() {
                     this@MusicPlayer,
                     false
                 )
+                albumArt.setOnClickListener{
+                    BaseActivity.mGreedyGameAgent.showUII("float-4343")
+                }
             }
 
             secondRotateAnimation.addUpdateListener {
@@ -217,6 +220,7 @@ class MusicPlayer : AppCompatActivity() {
                             , R.drawable.download
                         )
                     )
+                    albumArt.setOnClickListener(null)
                 }
             }
             firstRotateAnimation.addListener(object : Animator.AnimatorListener {
