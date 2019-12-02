@@ -18,10 +18,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".showcase.nongames.travel_app.TravelDashboard"></activity>
         <activity
             android:name=".showcase.nongames.fullapp.MusicPlayer"
             android:label="@string/title_activity_music_player"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".showcase.nongames.UtilityActivity" />
         <activity android:name=".showcase.nongames.TilesActivity" />
         <activity android:name=".BaseActivity" />

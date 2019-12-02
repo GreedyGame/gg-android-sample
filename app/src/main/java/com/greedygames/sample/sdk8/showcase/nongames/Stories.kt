@@ -112,7 +112,7 @@ fun String.toast(context:Context){
     Toast.makeText(context,this,Toast.LENGTH_SHORT).show()
 }
 
-fun ImageView.loadAd(unitId:String, greedyGameAgent: GreedyGameAgent,context: Context,activity:Activity,useCircularTransform:Boolean = false){
+fun ImageView.loadAd(unitId:String, greedyGameAgent: GreedyGameAgent,context: Context,activity:Activity? = null,useCircularTransform:Boolean = false){
     if(unitId.isNotEmpty()){
         val adPath = greedyGameAgent.getPath(unitId)
         ;
@@ -128,8 +128,14 @@ fun ImageView.loadAd(unitId:String, greedyGameAgent: GreedyGameAgent,context: Co
     }
 
 }
+fun ImageView.loadImage(url:String,useCircularTransform:Boolean = false){
+    if(url.isNotEmpty()){
+        Picasso.with(context).load(url).into(this)
+    }
 
-fun ImageView.loadWithRoundedCorners(unitId:String, greedyGameAgent: GreedyGameAgent,context: Context,activity:Activity,useCircularTransform:Boolean = false){
+}
+
+fun ImageView.loadWithRoundedCorners(unitId:String, greedyGameAgent: GreedyGameAgent,context: Context,activity:Activity?=null,useCircularTransform:Boolean = false){
     if(unitId.isNotEmpty()){
         val adPath = greedyGameAgent.getPath(unitId);
         if(adPath.isNotEmpty()){

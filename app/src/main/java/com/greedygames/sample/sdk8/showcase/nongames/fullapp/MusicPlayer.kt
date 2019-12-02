@@ -184,7 +184,7 @@ class MusicPlayer : AppCompatActivity() {
 //        val firstScaleAnimation = ObjectAnimator.ofFloat(albumArt,"scaleX",1f,0f)
 //        val secondScaleAnimation = ObjectAnimator.ofFloat(albumArt,"scaleX",0f,1f)
             val firstRotateAnimation = ObjectAnimator.ofFloat(albumArt,"rotationX",1f, 180f)
-            val secondRotateAnimation = ObjectAnimator.ofFloat(albumArt,"rotationX",180f, 1f)
+            val secondRotateAnimation = ObjectAnimator.ofFloat(bigAdUnit,"rotationX",180f, 1f)
 //        firstScaleAnimation.interpolator = DecelerateInterpolator()
 //        secondScaleAnimation.interpolator = AccelerateDecelerateInterpolator()
             firstRotateAnimation.interpolator = DecelerateInterpolator()
@@ -193,35 +193,50 @@ class MusicPlayer : AppCompatActivity() {
 //        secondScaleAnimation.duration = 500
             firstRotateAnimation.duration = 1000
             secondRotateAnimation.duration = 1000
+            bigAdUnit.loadAd(
+                "float-4343",
+                BaseActivity.mGreedyGameAgent,
+                this@MusicPlayer,
+                this@MusicPlayer,
+                false
+            )
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                albumArt.setImageDrawable(getDrawable(R.drawable.download))
+            } else {
+                albumArt.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        this@MusicPlayer
+                        , R.drawable.download
+                    )
+                )
+                albumArt.setOnClickListener(null)
+            }
 
             firstRotateAnimation.addUpdateListener {
                 Log.d("JUDE-ANI","Animated Fraction ${it.animatedValue}, ${it.animatedFraction}")
-                if(it.animatedFraction > 50f)
-                albumArt.loadAd(
-                    "float-4343",
-                    BaseActivity.mGreedyGameAgent,
-                    this@MusicPlayer,
-                    this@MusicPlayer,
-                    false
-                )
-                albumArt.setOnClickListener{
+                bigAdUnit.visibility = View.VISIBLE
+                bigAdUnit.isEnabled = true
+                bigAdUnit.alpha  = it.animatedFraction
+                albumArt.alpha = 1 - it.animatedFraction
+                if(bigAdUnit.alpha == 1f){
+                    albumArt.visibility = View.INVISIBLE
+                }
+                bigAdUnit.setOnClickListener{
                     BaseActivity.mGreedyGameAgent.showUII("float-4343")
                 }
             }
 
             secondRotateAnimation.addUpdateListener {
-                if(it.animatedFraction < 50f)
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    albumArt.setImageDrawable(getDrawable(R.drawable.download))
-                } else {
-                    albumArt.setImageDrawable(
-                        ContextCompat.getDrawable(
-                            this@MusicPlayer
-                            , R.drawable.download
-                        )
-                    )
-                    albumArt.setOnClickListener(null)
+                Log.d("ANIMATED-PERCENT","${it.animatedFraction}")
+                albumArt.visibility = View.VISIBLE
+                albumArt.rotationX = 0f
+                albumArt.alpha  = it.animatedFraction
+                bigAdUnit.alpha = 1 - it.animatedFraction
+                if(albumArt.alpha == 1f){
+                    bigAdUnit.visibility = View.INVISIBLE
+                    bigAdUnit.isEnabled = false
                 }
+
             }
             firstRotateAnimation.addListener(object : Animator.AnimatorListener {
                 override fun onAnimationRepeat(animation: Animator?) {
@@ -237,14 +252,14 @@ class MusicPlayer : AppCompatActivity() {
                 }
 
                 override fun onAnimationEnd(animation: Animator?) {
-                    albumArt.loadAd(
-                        "float-4343",
-                        BaseActivity.mGreedyGameAgent,
-                        this@MusicPlayer,
-                        this@MusicPlayer,
-                        false
-                    )
-                    albumArt.rotationX = 0f
+//                    albumArt.loadAd(
+//                        "float-4343",
+//                        BaseActivity.mGreedyGameAgent,
+//                        this@MusicPlayer,
+//                        this@MusicPlayer,
+//                        false
+//                    )
+//                    albumArt.rotationX = 0f
                     albumArt.setOnClickListener { BaseActivity.mGreedyGameAgent.showUII("float-4191") }
 
                     //secondScaleAnimation.start()
@@ -266,16 +281,16 @@ class MusicPlayer : AppCompatActivity() {
                 }
 
                 override fun onAnimationEnd(animation: Animator?) {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        albumArt.setImageDrawable(getDrawable(R.drawable.download))
-                    } else {
-                        albumArt.setImageDrawable(
-                            ContextCompat.getDrawable(
-                                this@MusicPlayer
-                                , R.drawable.download
-                            )
-                        )
-                    }
+//                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//                        albumArt.setImageDrawable(getDrawable(R.drawable.download))
+//                    } else {
+//                        albumArt.setImageDrawable(
+//                            ContextCompat.getDrawable(
+//                                this@MusicPlayer
+//                                , R.drawable.download
+//                            )
+//                        )
+//                    }
                     albumArt.setOnClickListener(null)
                 }
 

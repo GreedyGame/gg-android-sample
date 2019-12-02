@@ -11,8 +11,8 @@ import com.greedygames.sample.sdk8.R
 import com.greedygames.sample.sdk8.showcase.nongames.StoriesActivity
 import com.greedygames.sample.sdk8.showcase.nongames.TilesActivity
 import com.greedygames.sample.sdk8.showcase.nongames.UtilityActivity
-import com.greedygames.sample.sdk8.showcase.nongames.fullapp.MusicPlayer
 import com.greedygames.sample.sdk8.showcase.nongames.toast
+import com.greedygames.sample.sdk8.showcase.nongames.travel_app.TravelDashboard
 import kotlinx.android.synthetic.main.activity_showcase_menu.*
 
 class ShowcaseMenu : BaseActivity() {
@@ -42,7 +42,7 @@ class ShowcaseMenu : BaseActivity() {
                 }
                 NonGamesTypes.FULL ->{
                     startActivity(Intent(this,
-                        MusicPlayer::class.java))
+                        TravelDashboard::class.java))
                 }
             }
         }

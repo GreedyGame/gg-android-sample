@@ -18,7 +18,8 @@ open class BaseActivity : AppCompatActivity() {
             .addUnitList(listOf(
                 "float-4343",
                 "float-4344",
-                "float-4345"))
+                "float-4345",
+                "float-4346"))
             .enableAdmob(true)
             .withAgentListener(mBaseCampaignStateListener)
             .build()
