@@ -78,6 +78,7 @@ class TravelDashboard : BaseActivity(),
      */
     private inner class TravelDashboardCampaignListener:CampaignStateListener{
         fun callFilters(){
+            tabAd.loadTextAd(AD_UNIT_4347)
             placesPagerAdapter.filterData()
             newPlacesAdapter.filterData()
         }
