@@ -5,50 +5,40 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.greedygame.android.agent.GreedyGameAgent
 import com.greedygame.android.core.campaign.CampaignStateListener
-import com.greedygames.sample.sdk8.showcase.nongames.toast
+;
+import com.greedygames.sample.sdk8.showcase.nongames.travel_app.toast
+const val TAG = "GG-SAMPLE"
 
 open class BaseActivity : AppCompatActivity() {
 
-    var mBaseCampaignStateListener = BaseCampaginListener()
+    var mBaseCampaignStateListener = BaseCampaignListener()
+
     private var mRefreshTimer:CountDownTimer? = null
     
     fun initAds(){
         mGreedyGameAgent = GreedyGameAgent.Builder(this)
             .setGameId("66081223")
+                //You can also use addUnitId(unitId:String)
             .addUnitList(listOf(
                 "float-4343",
                 "float-4344",
                 "float-4345",
-                "float-4346"))
+                "float-4346",
+                "float-4347",
+                "float-4348"))
             .enableAdmob(true)
             .withAgentListener(mBaseCampaignStateListener)
             .build()
         mGreedyGameAgent.init()
     }
 
-    fun refreshAds(){
-        object :CountDownTimer(62000,1000){
-            override fun onFinish() {
-                this.start()
-                mGreedyGameAgent.startEventRefresh()
-            }
-
-            override fun onTick(millisUntilFinished: Long) {
-
-            }
-
-        }.start()
-    }
-
-
-    override fun onStart() {
-        super.onStart()
-
-    }
-
-    open inner class BaseCampaginListener:CampaignStateListener{
+    /**
+     * BaseCampaignListener will be attached to GreedyGame Agent instance to wire events from SDK to appropriate classes.
+     */
+    open inner class BaseCampaignListener:CampaignStateListener{
         var receiver:CampaignStateListener?=null
         override fun onUnavailable() {
+            startRefreshTimer()
             receiver?.onUnavailable()
         }
 
@@ -60,14 +50,16 @@ open class BaseActivity : AppCompatActivity() {
 
         override fun onError(p0: String?) {
             receiver?.onError(p0)
+            p0?.toast(applicationContext)
         }
 
     }
+
     private fun startRefreshTimer(){
         if(mRefreshTimer == null) {
             mRefreshTimer = object : CountDownTimer(62000, 1000) {
                 override fun onFinish() {
-                    Log.d("JUDE", "Countdown timer complete. Refreshing and Reloading")
+                    Log.d(TAG, "Countdown timer complete. Refreshing and Reloading")
                     mGreedyGameAgent.startEventRefresh()
                     this.start()
                 }
@@ -81,6 +73,6 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     companion object {
-        lateinit var mGreedyGameAgent: GreedyGameAgent;
+        lateinit var mGreedyGameAgent: GreedyGameAgent
     }
 }

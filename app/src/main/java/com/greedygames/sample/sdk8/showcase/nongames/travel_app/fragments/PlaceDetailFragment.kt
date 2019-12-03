@@ -1,7 +1,6 @@
 package com.greedygames.sample.sdk8.showcase.nongames.travel_app.fragments
 
 import android.animation.ValueAnimator
-import android.app.Activity
 import android.content.Context
 import android.graphics.Rect
 import android.os.Bundle
@@ -12,14 +11,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.greedygames.sample.sdk8.BaseActivity
 import com.greedygames.sample.sdk8.R
-import com.greedygames.sample.sdk8.showcase.nongames.loadAd
-import com.greedygames.sample.sdk8.showcase.nongames.loadImage
+import com.greedygames.sample.sdk8.showcase.nongames.travel_app.loadAd
+import com.greedygames.sample.sdk8.showcase.nongames.travel_app.loadImage
 import com.greedygames.sample.sdk8.showcase.nongames.travel_app.model.PlacesPagerItem
 import kotlinx.android.synthetic.main.fragment_place_detail.*
 
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
-
 
 class PlaceDetailFragment : Fragment() {
     private var param1: PlacesPagerItem? = null
@@ -49,16 +46,14 @@ class PlaceDetailFragment : Fragment() {
             activity?.onBackPressed()
         }
         with("float-4346") {
-            ctaAdUnit.loadAd(this,BaseActivity.mGreedyGameAgent, context!!, activity as Activity, false)
+            ctaAdUnit.loadAd(this,BaseActivity.mGreedyGameAgent, context!!)
             ctaAdUnit.setOnClickListener {
                 BaseActivity.mGreedyGameAgent.showUII(this)
             }
             topAdUnit.loadAd(
                 this,
                 BaseActivity.mGreedyGameAgent,
-                context!!,
-                activity as Activity,
-                false
+                context!!
             )
             topAdUnit.setOnClickListener {
                 BaseActivity.mGreedyGameAgent.showUII(this)
@@ -78,7 +73,7 @@ class PlaceDetailFragment : Fragment() {
 
         val scrollViewRect = Rect()
 
-        val  visiblityController = VisiblityController{
+        val  visibilityController = VisiblityController{
             if(it == View.VISIBLE){
                 topAdUnit?.animate()?.translationY(0f)?.duration = 1000
             }
@@ -89,18 +84,18 @@ class PlaceDetailFragment : Fragment() {
 
         }
 
-        visiblityController.update(View.GONE)
+        visibilityController.update(View.GONE)
 
         scrollView?.getHitRect(scrollViewRect);
         scrollView?.viewTreeObserver?.addOnScrollChangedListener {
 
                 if (ctaAdUnit?.getLocalVisibleRect(scrollViewRect) == true) {
                     Log.d("SCROLL_VI", "VISIBLE")
-                    visiblityController.update(View.GONE)
+                    visibilityController.update(View.GONE)
 
 
                 } else {
-                    visiblityController.update(View.VISIBLE)
+                    visibilityController.update(View.VISIBLE)
                     Log.d("SCROLL_VI", "NOT VISIBLE")
                 }
         }

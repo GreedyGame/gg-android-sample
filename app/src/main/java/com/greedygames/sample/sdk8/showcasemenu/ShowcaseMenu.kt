@@ -8,10 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.greedygame.android.core.campaign.CampaignStateListener
 import com.greedygames.sample.sdk8.BaseActivity
 import com.greedygames.sample.sdk8.R
-import com.greedygames.sample.sdk8.showcase.nongames.StoriesActivity
-import com.greedygames.sample.sdk8.showcase.nongames.TilesActivity
-import com.greedygames.sample.sdk8.showcase.nongames.UtilityActivity
-import com.greedygames.sample.sdk8.showcase.nongames.toast
 import com.greedygames.sample.sdk8.showcase.nongames.travel_app.TravelDashboard
 import kotlinx.android.synthetic.main.activity_showcase_menu.*
 
@@ -22,29 +18,14 @@ class ShowcaseMenu : BaseActivity() {
         setContentView(R.layout.activity_showcase_menu)
         setup()
         initAds()
+        //Registering the event receiver for this class to the BaseClass
         mBaseCampaignStateListener.receiver = ShowcaseListener()
     }
 
     private fun setup(){
         nonGamesSelectionList.layoutManager = LinearLayoutManager(this,RecyclerView.HORIZONTAL,false);
         nonGamesSelectionList.adapter = NonGamesMenuAdapter{
-            when(it){
-                NonGamesTypes.STORIES ->{
-                    startActivity(Intent(this,
-                        StoriesActivity::class.java))
-                }
-                NonGamesTypes.TILES ->{
-                    startActivity(Intent(this, TilesActivity::class.java))
-                }
-                NonGamesTypes.UTILITY ->{
-                    startActivity(Intent(this,
-                        UtilityActivity::class.java))
-                }
-                NonGamesTypes.FULL ->{
-                    startActivity(Intent(this,
-                        TravelDashboard::class.java))
-                }
-            }
+
         }
         gamesSelectionList.layoutManager = LinearLayoutManager(this,RecyclerView.HORIZONTAL,false);
         gamesSelectionList.adapter = GamesMenuAdapter{
@@ -54,7 +35,7 @@ class ShowcaseMenu : BaseActivity() {
     inner class ShowcaseListener:CampaignStateListener{
         override fun onUnavailable() {
             loader.visibility = View.INVISIBLE
-            "Ads are not loaded".toast(this@ShowcaseMenu)
+            startActivity(Intent(this@ShowcaseMenu,TravelDashboard::class.java))
         }
 
         override fun onAvailable(p0: String?) {
@@ -63,7 +44,7 @@ class ShowcaseMenu : BaseActivity() {
         }
 
         override fun onError(p0: String?) {
-            
+
         }
 
     }

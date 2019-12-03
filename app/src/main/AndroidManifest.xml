@@ -41,21 +41,21 @@
             android:configChanges="keyboardHidden|orientation|screenSize|screenLayout|layoutDirection"
             android:hardwareAccelerated="true"
             android:launchMode="singleTask"
-            android:screenOrientation="landscape"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.GGTransparent" />
         <activity
             android:name="com.greedygame.android.core.mediation.greedygame.GGS2SActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|screenLayout|layoutDirection"
             android:hardwareAccelerated="true"
             android:launchMode="singleTask"
-            android:screenOrientation="landscape"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.GGTransparent" />
         <activity
             android:name="com.greedygame.android.core.mediation.admob.GGAdMobActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|screenLayout|layoutDirection"
             android:hardwareAccelerated="true"
             android:launchMode="singleTask"
-            android:screenOrientation="landscape"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.GGTransparent" />
 
         <uses-library

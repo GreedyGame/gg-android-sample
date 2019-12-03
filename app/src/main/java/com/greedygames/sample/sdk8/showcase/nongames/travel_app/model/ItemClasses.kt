@@ -1,10 +1,10 @@
 package com.greedygames.sample.sdk8.showcase.nongames.travel_app.model
 
 import android.os.Parcelable
-import com.greedygames.sample.sdk8.showcase.nongames.ItemTypes
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
+
 open class BaseItem(
     val itemType :ItemTypes,
     val value:String
@@ -24,3 +24,6 @@ data class AdPagerItem(
     private val adValue:String
 ):BaseItem(type,adValue)
 
+enum class ItemTypes{
+    AD,CONTENT;
+}
