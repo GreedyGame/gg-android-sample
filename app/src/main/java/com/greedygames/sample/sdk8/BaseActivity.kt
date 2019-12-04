@@ -46,7 +46,7 @@ open class BaseActivity : AppCompatActivity() {
         }
 
         override fun onAvailable(p0: String?) {
-            "Available".toast(applicationContext)
+//            "Available".toast(applicationContext)
             receiver?.onAvailable(p0)
             startRefreshTimer()
             isGreedyGameAgentInitialised = true
