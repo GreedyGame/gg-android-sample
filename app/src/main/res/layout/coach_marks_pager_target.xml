@@ -14,27 +14,28 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center|end"
             android:fontFamily="@font/poppins_semibold"
-            android:text="Wanna see again?"
+            android:text="@string/get_more_user_engagement_with_the_ad"
             android:textColor="#fff"
             android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toTopOf="@+id/subLine"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/subLine"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center|end"
+            android:layout_marginBottom="10dp"
             android:fontFamily="@font/poppins"
-            android:text="Click above"
-            android:layout_marginTop="10dp"
+            android:text="@string/place_ads_in_between_contents_you_improve_your_chances_of_a_click_and_no_on_the_face_ads"
             android:textColor="#fff"
-            android:textSize="16sp"
+            android:textSize="12sp"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/msgText" />
+            app:layout_constraintStart_toStartOf="parent" />
 
 
 

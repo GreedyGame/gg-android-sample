@@ -112,7 +112,7 @@ class NewPlacesAdapter:RecyclerView.Adapter<NewPlacesAdapter.ViewHolder>() {
         fun bind(baseItem: BaseItem) {
             when(baseItem.itemType){
                 ItemTypes.AD->{
-                    view.placeImage.scaleType = ImageView.ScaleType.CENTER_INSIDE
+                    view.placeImage.scaleType = ImageView.ScaleType.FIT_CENTER
                     view.placeImage.loadWithRoundedCorners(baseItem.value,BaseActivity.mGreedyGameAgent,view.context)
                     view.placeImage.setOnClickListener {
                         BaseActivity.mGreedyGameAgent.showUII(baseItem.value)

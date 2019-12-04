@@ -10,7 +10,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import com.greedygame.android.agent.GreedyGameAgent
 import com.greedygames.sample.sdk8.BaseActivity
-import com.greedygames.sample.sdk8.CircularTransform
+import com.greedygames.sample.sdk8.utils.notimportant.CircularTransform
 import com.squareup.picasso.MemoryPolicy
 import com.squareup.picasso.Picasso
 import jp.wasabeef.picasso.transformations.RoundedCornersTransformation

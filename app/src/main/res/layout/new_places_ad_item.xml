@@ -12,6 +12,6 @@
        android:layout_width="117dp"
        android:layout_height="117dp"
        android:id="@+id/placeImage"
-       android:src="@drawable/small_island"/>
+      />
 
 </LinearLayout>

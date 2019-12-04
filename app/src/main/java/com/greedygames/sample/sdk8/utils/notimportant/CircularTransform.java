@@ -1,4 +1,4 @@
-package com.greedygames.sample.sdk8;
+package com.greedygames.sample.sdk8.utils.notimportant;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;

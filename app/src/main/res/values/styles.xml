@@ -9,7 +9,7 @@
         <item name="android:textColor">#000</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="android:fontFamily">@font/source_sans_pro</item>
+        <item name="android:fontFamily">@font/poppins</item>
     </style>
 
     <style name="AppTheme.NoActionBar">

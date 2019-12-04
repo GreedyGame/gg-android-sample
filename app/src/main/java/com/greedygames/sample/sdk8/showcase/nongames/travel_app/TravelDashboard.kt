@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import androidx.core.view.doOnPreDraw
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.transition.Slide
@@ -20,13 +19,14 @@ import com.greedygames.sample.sdk8.showcase.nongames.travel_app.adapters.recycle
 import com.greedygames.sample.sdk8.showcase.nongames.travel_app.adapters.viewpager.PlacesPagerAdapter
 import com.greedygames.sample.sdk8.showcase.nongames.travel_app.fragments.PlaceDetailFragment
 import com.greedygames.sample.sdk8.utils.notimportant.Rectangle
+import com.greedygames.sample.sdk8.utils.notimportant.SharedPrefManager
+import com.takusemba.spotlight.OnSpotlightListener
 import com.takusemba.spotlight.Spotlight
 import com.takusemba.spotlight.Target
 import com.takusemba.spotlight.effet.RippleEffect
 import com.takusemba.spotlight.shape.Circle
 import kotlinx.android.synthetic.main.activity_showcase_menu.*
 import kotlinx.android.synthetic.main.activity_travel_dashboard.*
-import kotlinx.android.synthetic.main.coach_marks_restart_target.view.*
 
 class TravelDashboard : BaseActivity(),
     PlaceDetailFragment.OnFragmentInteractionListener {
@@ -34,7 +34,6 @@ class TravelDashboard : BaseActivity(),
     private val frameHolderId = 2567
     private val AD_UNIT_4347 = "float-4347"
     private lateinit var spotlight:Spotlight;
-    var animationCount = 0;
 
     val placesPagerAdapter:PlacesPagerAdapter = PlacesPagerAdapter{
         val fragment =
@@ -65,43 +64,38 @@ class TravelDashboard : BaseActivity(),
         tabAd.setOnClickListener {
             mGreedyGameAgent.showUII(AD_UNIT_4347)
         }
-    }
-
-    private fun initCoachmarks(){
-
-        val restartCoachmarksTarget = getRestartCoachmarksTarget()
-        val textAdTarget = getTextAdTarget()
-        val pagerAdTarget = getPagerAdTarget()
-        val recyclerViewAdTarget = getRecyclerViewAdTarget()
-        spotlight = Spotlight.Builder(this)
-            .setTargets(restartCoachmarksTarget,textAdTarget,pagerAdTarget,recyclerViewAdTarget)
-            .build()
-        profileImage.doOnPreDraw {
-            spotlight.start()
+        profileImage.setOnClickListener{
+            initCoachmarks()
         }
     }
 
-    private fun getRecyclerViewAdTarget():Target{
-        val viewPosition = newPlacesRv.getCenterCoordinates()
-        return Target.Builder()
-            .setAnchor(viewPosition[0].toFloat(),viewPosition[1].toFloat())
-            .setShape(Rectangle(newPlacesRv,10))
-            .setOverlay(LayoutInflater.from(this).inflate(R.layout.coach_marks_restart_target,null).apply {
-                msgText.text = "Can you spot the ad here?"
+    private fun initCoachmarks(){
+        val restartCoachmarksTarget = getRestartCoachmarksTarget()
+        val textAdTarget = getTextAdTarget()
+        val pagerAdTarget = getPagerAdTarget()
+        spotlight = Spotlight.Builder(this)
+            .setTargets(textAdTarget,pagerAdTarget,restartCoachmarksTarget)
+            .setOnSpotlightListener(object : OnSpotlightListener {
+                override fun onEnded() {
+                    SharedPrefManager.shouldShowCoachmarks = false
+                }
+
+                override fun onStarted() {
+                    
+                }
+
             })
-            .setEffect(RippleEffect(100f, 200f, argb(30, 124, 255, 90)))
             .build()
+        spotlight.start()
     }
+
 
     private fun getTextAdTarget():Target{
         val viewPosition = linearLayout.getCenterCoordinates()
         return Target.Builder()
             .setAnchor(viewPosition[0].toFloat(),viewPosition[1].toFloat())
             .setShape(Rectangle(linearLayout,10))
-            .setOverlay(LayoutInflater.from(this).inflate(R.layout.coach_marks_restart_target,null).apply {
-                msgText.text = "Can you spot the ad here?"
-            })
-            .setEffect(RippleEffect(100f, 200f, argb(30, 124, 255, 90)))
+            .setOverlay(LayoutInflater.from(this).inflate(R.layout.coach_marks_textad_target,null))
             .build()
 
     }
@@ -111,11 +105,7 @@ class TravelDashboard : BaseActivity(),
         return Target.Builder()
             .setAnchor(viewPosition[0].toFloat(),viewPosition[1].toFloat())
             .setShape(Rectangle(suggestionsPager,50))
-            .setOverlay(LayoutInflater.from(this).inflate(R.layout.coach_marks_restart_target,null).apply {
-                msgText.text = "You can put ads in ViewPager also"
-                msgText.gravity =  Gravity.BOTTOM
-            })
-            .setEffect(RippleEffect(100f, 200f, argb(30, 124, 255, 90)))
+            .setOverlay(LayoutInflater.from(this).inflate(R.layout.coach_marks_pager_target,null))
             .build()
     }
     private fun  getRestartCoachmarksTarget():Target{
@@ -130,25 +120,17 @@ class TravelDashboard : BaseActivity(),
     }
 
     fun showNext(v:View){
-        if(animationCount == 2){
-            scrollView.smoothScrollTo(0,400)
-            scrollView.postDelayed({
-                spotlight.next()
-            },700)
-        }
-        else
-            spotlight.next()
-        animationCount++
+        spotlight.next()
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
-//        if(hasFocus){
-//            root.postDelayed({
-//                initCoachmarks()
-//            },1000)
+        if(hasFocus && SharedPrefManager.shouldShowCoachmarks){
+            root.postDelayed({
+                initCoachmarks()
+            },1000)
 
-//        }
+        }
     }
 
     private fun setupRecyclerView() {

@@ -14,8 +14,10 @@ open class BaseActivity : AppCompatActivity() {
     var mBaseCampaignStateListener = BaseCampaignListener()
 
     private var mRefreshTimer:CountDownTimer? = null
+
     
     fun initAds(){
+
         mGreedyGameAgent = GreedyGameAgent.Builder(this)
             .setGameId("66081223")
                 //You can also use addUnitId(unitId:String)
@@ -24,7 +26,8 @@ open class BaseActivity : AppCompatActivity() {
                 "float-4344",
                 "float-4345",
                 "float-4346",
-                "float-4347"))
+                "float-4347",
+                "float-4348"))
             .enableAdmob(true)
             .withAgentListener(mBaseCampaignStateListener)
             .build()
@@ -39,18 +42,21 @@ open class BaseActivity : AppCompatActivity() {
         override fun onUnavailable() {
             startRefreshTimer()
             receiver?.onUnavailable()
+            isGreedyGameAgentInitialised = true
         }
 
         override fun onAvailable(p0: String?) {
             "Available".toast(applicationContext)
             receiver?.onAvailable(p0)
             startRefreshTimer()
+            isGreedyGameAgentInitialised = true
         }
 
         override fun onError(p0: String?) {
             receiver?.onError(p0)
             startRefreshTimer()
             p0?.toast(applicationContext)
+            isGreedyGameAgentInitialised = true
         }
 
     }
@@ -79,5 +85,6 @@ open class BaseActivity : AppCompatActivity() {
 
     companion object {
         lateinit var mGreedyGameAgent: GreedyGameAgent
+        var isGreedyGameAgentInitialised = false
     }
 }

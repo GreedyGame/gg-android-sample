@@ -12,7 +12,7 @@
        android:layout_width="80dp"
        android:layout_height="80dp"
        android:id="@+id/placeImage"
-       android:src="@drawable/small_island"/>
+       />
 
     <TextView
         android:id="@+id/placeName"

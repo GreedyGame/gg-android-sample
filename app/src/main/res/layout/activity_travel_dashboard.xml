@@ -92,8 +92,7 @@
                 <ImageView
                     android:layout_marginStart="8dp"
                     android:layout_width="300px"
-                    android:scaleType="center"
-                    tools:src="@drawable/ic_play_circle_filled_black_24dp"
+                    android:scaleType="centerInside"
                     android:layout_height="50px"
                     android:layout_weight="10"
                     android:fontFamily="@font/poppins"
