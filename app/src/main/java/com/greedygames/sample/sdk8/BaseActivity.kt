@@ -24,8 +24,7 @@ open class BaseActivity : AppCompatActivity() {
                 "float-4344",
                 "float-4345",
                 "float-4346",
-                "float-4347",
-                "float-4348"))
+                "float-4347"))
             .enableAdmob(true)
             .withAgentListener(mBaseCampaignStateListener)
             .build()
@@ -50,9 +49,15 @@ open class BaseActivity : AppCompatActivity() {
 
         override fun onError(p0: String?) {
             receiver?.onError(p0)
+            startRefreshTimer()
             p0?.toast(applicationContext)
         }
 
+    }
+
+    private fun stopRefreshTimer(){
+        mRefreshTimer?.cancel()
+        mRefreshTimer = null
     }
 
     private fun startRefreshTimer(){

@@ -1,5 +1,6 @@
 package com.greedygames.sample.sdk8.showcase.nongames.travel_app.adapters.viewpager
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -61,16 +62,13 @@ class PlacesPagerAdapter(private val onPageClick:(item:PlacesPagerItem)->Unit):R
     )
     var data = listOf<BaseItem>()
 
-    init {
-        //Not required if data is loaded from another source.
-        filterData()
-    }
 
     /**
      * This function will filter data based on the campaign availability. Each time a refresh is called on GreedyGame agent
      * data will be filtered based on campaign status.
      */
     fun filterData(){
+        Log.d("CAMPAIGN_AVAILABLE","Called with ${BaseActivity.mGreedyGameAgent.isCampaignAvailable}")
         data = if(!BaseActivity.mGreedyGameAgent.isCampaignAvailable){
             originalData.filter {
                 it.itemType == ItemTypes.CONTENT
@@ -114,7 +112,7 @@ class PlacesPagerAdapter(private val onPageClick:(item:PlacesPagerItem)->Unit):R
         ) {
             when(listItem.itemType){
                 ItemTypes.AD->{
-                    if(!BaseActivity.mGreedyGameAgent.isCampaignAvailable) {
+                    if(BaseActivity.mGreedyGameAgent.isCampaignAvailable) {
                         view.adUnit.loadAd(
                             listItem.value,
                             BaseActivity.mGreedyGameAgent,

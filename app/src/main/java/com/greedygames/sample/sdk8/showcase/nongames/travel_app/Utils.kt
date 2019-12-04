@@ -103,10 +103,21 @@ fun ImageView.loadWithRoundedCorners(unitId:String, greedyGameAgent: GreedyGameA
             picasso.transform(RoundedCornersTransformation(10,0))
             picasso.into(this)
         }
+        else{
+            this.visibility = View.GONE
+        }
     }
 
 }
 
 fun String.toast(context:Context){
     Toast.makeText(context,this,Toast.LENGTH_SHORT).show()
+}
+
+fun View.getCenterCoordinates():IntArray{
+    val viewPosition = IntArray(2)
+    getLocationOnScreen(viewPosition)
+    viewPosition[0] = viewPosition[0]+width/2
+    viewPosition[1] = viewPosition[1]+height/2
+    return viewPosition
 }
