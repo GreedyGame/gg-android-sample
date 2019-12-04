@@ -1,5 +1,6 @@
 package com.greedygames.sample.sdk8.showcase.nongames.travel_app
 
+import android.app.AlertDialog
 import android.graphics.Color.argb
 import android.os.Bundle
 import android.view.Gravity
@@ -27,6 +28,7 @@ import com.takusemba.spotlight.effet.RippleEffect
 import com.takusemba.spotlight.shape.Circle
 import kotlinx.android.synthetic.main.activity_showcase_menu.*
 import kotlinx.android.synthetic.main.activity_travel_dashboard.*
+import kotlinx.android.synthetic.main.exit_dialouge_header.view.*
 
 class TravelDashboard : BaseActivity(),
     PlaceDetailFragment.OnFragmentInteractionListener {
@@ -131,6 +133,26 @@ class TravelDashboard : BaseActivity(),
             },1000)
 
         }
+    }
+
+    override fun onBackPressed() {
+        if(supportFragmentManager.backStackEntryCount == 0)
+            showExitAlert{
+                super.onBackPressed()
+            }
+        else
+            super.onBackPressed()
+    }
+    private fun showExitAlert(callback:()->Unit){
+        AlertDialog.Builder(this)
+            .setPositiveButton("No",null)
+            .setNegativeButton("Yes"){ _, _ ->
+                callback()
+            }
+            .setCustomTitle(LayoutInflater.from(this).inflate(R.layout.exit_dialouge_header,null).apply {
+                adUnit.loadAd("float-4346",mGreedyGameAgent,this@TravelDashboard)
+            })
+            .show()
     }
 
     private fun setupRecyclerView() {
