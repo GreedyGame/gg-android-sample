@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:onClick="showNext"
+    android:layout_height="match_parent">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:id="@+id/msgText"
+            android:layout_gravity="center|end"
+            android:text="Wanna see again?"
+            android:fontFamily="@font/poppins_semibold"
+            android:textColor="#fff" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:id="@+id/subLine"
+            android:layout_gravity="center|end"
+            android:text="Click above"
+            android:fontFamily="@font/poppins"
+            android:textColor="#fff" />
+
+
+
+
+</LinearLayout>
