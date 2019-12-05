@@ -75,23 +75,27 @@ class TravelDashboard : BaseActivity(),
     }
 
     private fun initCoachmarks(){
-        val restartCoachmarksTarget = getRestartCoachmarksTarget()
-        val textAdTarget = getTextAdTarget()
-        val pagerAdTarget = getPagerAdTarget()
-        spotlight = Spotlight.Builder(this)
-            .setTargets(textAdTarget,pagerAdTarget,restartCoachmarksTarget)
-            .setOnSpotlightListener(object : OnSpotlightListener {
-                override fun onEnded() {
-                    SharedPrefManager.shouldShowCoachmarks = false
-                }
+        scrollView.smoothScrollTo(0,0)
+        profileImage.postDelayed({
+            val restartCoachmarksTarget = getRestartCoachmarksTarget()
+            val textAdTarget = getTextAdTarget()
+            val pagerAdTarget = getPagerAdTarget()
+            spotlight = Spotlight.Builder(this)
+                .setTargets(textAdTarget,pagerAdTarget,restartCoachmarksTarget)
+                .setOnSpotlightListener(object : OnSpotlightListener {
+                    override fun onEnded() {
+                        SharedPrefManager.shouldShowCoachmarks = false
+                    }
 
-                override fun onStarted() {
-                    
-                }
+                    override fun onStarted() {
 
-            })
-            .build()
-        spotlight.start()
+                    }
+
+                })
+                .build()
+            spotlight.start()
+        },1000)
+
     }
 
 
@@ -131,9 +135,7 @@ class TravelDashboard : BaseActivity(),
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
         if(hasFocus && SharedPrefManager.shouldShowCoachmarks){
-            root.postDelayed({
-                initCoachmarks()
-            },1000)
+            initCoachmarks()
 
         }
     }
