@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:dist="http://schemas.android.com/apk/distribution"
-    package="com.greedygames.sample.sdk8">
+    package="com.greedygame.sample.sdk8">
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -10,7 +10,7 @@
     <dist:module dist:instant="true" />
 
     <application
-        android:name=".BaseApplication"
+        android:name="com.greedygame.sample.sdk8.BaseApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -18,9 +18,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".BaseActivity" />
-        <activity android:name=".showcase.nongames.travel_app.TravelDashboard"></activity>
-        <activity android:name=".showcasemenu.ShowcaseMenu">
+        <activity android:name="com.greedygame.sample.sdk8.BaseActivity" />
+        <activity android:name="com.greedygame.sample.sdk8.showcase.nongames.travel_app.TravelDashboard"></activity>
+        <activity android:name="com.greedygame.sample.sdk8.showcasemenu.ShowcaseMenu">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
