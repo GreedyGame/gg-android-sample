@@ -14,13 +14,14 @@ import kotlinx.android.synthetic.main.activity_showcase_menu.*
 
 class ShowcaseMenu : BaseActivity() {
 
+    private val ggEventListener = ShowcaseListener()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_showcase_menu)
         initViewPager()
         setClickListeners()
         //Registering the event receiver for this class to the BaseClass
-        mBaseCampaignStateListener.receiver = ShowcaseListener()
         if(isGreedyGameAgentInitialised) {
            hideLoader()
         }
@@ -30,6 +31,14 @@ class ShowcaseMenu : BaseActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        mBaseCampaignStateListener.receiver = ggEventListener
+    }
+
+    override fun onPause() {
+        super.onPause()
+    }
 
     private fun setClickListeners(){
         seeDemoButton.setOnClickListener {
@@ -63,19 +72,16 @@ class ShowcaseMenu : BaseActivity() {
 
     inner class ShowcaseListener:CampaignStateListener{
         override fun onUnavailable() {
-            loader.visibility = View.INVISIBLE
             hideLoader()
         }
 
         override fun onAvailable(p0: String?) {
-            loader.visibility  = View.GONE
             hideLoader()
 
         }
 
         override fun onError(p0: String?) {
             loader.visibility  = View.GONE
-
         }
 
     }

@@ -29,13 +29,12 @@ import com.takusemba.spotlight.Spotlight
 import com.takusemba.spotlight.Target
 import com.takusemba.spotlight.effet.RippleEffect
 import com.takusemba.spotlight.shape.Circle
-import kotlinx.android.synthetic.main.activity_showcase_menu.*
 import kotlinx.android.synthetic.main.activity_travel_dashboard.*
 import kotlinx.android.synthetic.main.exit_dialouge_header.view.*
 
 class TravelDashboard : BaseActivity(),
     PlaceDetailFragment.OnFragmentInteractionListener {
-
+    private val ggEventListener = TravelDashboardCampaignListener()
     private val frameHolderId = 2567
     private val AD_UNIT_4347 = "float-4347"
     private lateinit var spotlight:Spotlight;
@@ -53,8 +52,16 @@ class TravelDashboard : BaseActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_travel_dashboard)
-        mBaseCampaignStateListener.receiver = TravelDashboardCampaignListener()
         initViews()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mBaseCampaignStateListener.receiver = ggEventListener
+    }
+
+    override fun onPause() {
+        super.onPause()
     }
 
     private fun initViews(){
@@ -191,12 +198,10 @@ class TravelDashboard : BaseActivity(),
             newPlacesAdapter.filterData()
         }
         override fun onUnavailable() {
-            loader.visibility = View.INVISIBLE
             callFilters()
         }
 
         override fun onAvailable(p0: String?) {
-            loader.visibility  = View.GONE
             callFilters()
         }
 
