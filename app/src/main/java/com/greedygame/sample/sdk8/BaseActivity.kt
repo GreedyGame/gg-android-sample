@@ -1,4 +1,4 @@
-package com.greedygames.sample.sdk8
+package com.greedygame.sample.sdk8
 
 import android.os.CountDownTimer
 import android.util.Log
@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.greedygame.android.agent.GreedyGameAgent
 import com.greedygame.android.core.campaign.CampaignStateListener
 ;
-import com.greedygames.sample.sdk8.showcase.nongames.travel_app.toast
+import com.greedygame.sample.sdk8.showcase.nongames.travel_app.toast
 const val TAG = "GG-SAMPLE"
 
 open class BaseActivity : AppCompatActivity() {
