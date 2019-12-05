@@ -116,7 +116,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:fontFamily="@font/poppins"
-                android:text="Detract yet delight written farther his general. If in so bred at dare rose lose good. Feel and make two real miss use easy. Celebrated delightful an especially increasing instrument am. Indulgence contrasted sufficient to unpleasant in in insensible favourable. Latter remark hunted enough vulgar say man. Sitting hearted on it without me.\nDetract yet delight written farther his general. If in so bred at dare rose lose good. Feel and make two real miss use easy. Celebrated delightful an especially increasing instrument am. Indulgence contrasted sufficient to unpleasant in in insensible favourable. Latter remark hunted enough vulgar say man. Sitting hearted on it without me."
+                android:text="@string/detract_yet_delight_written_farther_his_general_if_in_so_bred_at_dare_rose_lose_good_feel_and_make_two_real_miss_use_easy_celebrated_delightful_an_especially_increasing_instrument_am_indulgence_contrasted_sufficient_to_unpleasant_in_in_insensible_favourable_latter_remark_hunted_enough_vulgar_say_man_sitting_hearted_on_it_without_me_ndetract_yet_delight_written_farther_his_general_if_in_so_bred_at_dare_rose_lose_good_feel_and_make_two_real_miss_use_easy_celebrated_delightful_an_especially_increasing_instrument_am_indulgence_contrasted_sufficient_to_unpleasant_in_in_insensible_favourable_latter_remark_hunted_enough_vulgar_say_man_sitting_hearted_on_it_without_me"
                 android:textColor="#fff"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
