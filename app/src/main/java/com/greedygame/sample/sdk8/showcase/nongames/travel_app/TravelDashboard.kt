@@ -11,7 +11,6 @@ import android.widget.FrameLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.transition.Slide
-import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
 import com.greedygame.android.core.campaign.CampaignStateListener
 import com.greedygame.sample.sdk8.BaseActivity
@@ -155,6 +154,9 @@ class TravelDashboard : BaseActivity(),
             }
             .setCustomTitle(LayoutInflater.from(this).inflate(R.layout.exit_dialouge_header,null).apply {
                 adUnit.loadAd("float-4346",mGreedyGameAgent,this@TravelDashboard)
+                adUnit.setOnClickListener {
+                    mGreedyGameAgent.showUII("float-4346")
+                }
             })
             .show()
     }
@@ -171,8 +173,8 @@ class TravelDashboard : BaseActivity(),
             adapter = placesPagerAdapter
             placesPagerAdapter.filterData()
             orientation = ViewPager2.ORIENTATION_HORIZONTAL
-            setPageTransformer(MarginPageTransformer(10))
             setPageTransformer(SizeReductionPageTransformer())
+            dotsIndicator.setViewPager2(this)
         }
     }
 

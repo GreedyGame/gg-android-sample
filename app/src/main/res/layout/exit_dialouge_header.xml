@@ -4,9 +4,11 @@
     android:layout_height="wrap_content">
 
     <ImageView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="60dp"
+        android:adjustViewBounds="true"
         android:id="@+id/adUnit"
+        android:layout_gravity="center"
         android:scaleType="fitXY"
         />
     <TextView
@@ -15,7 +17,7 @@
         android:id="@+id/quitTitle"
         android:text="Are you sure you want to quit?"
         android:textAlignment="center"
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:layout_gravity="center"
         />
 

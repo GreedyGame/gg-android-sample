@@ -23,8 +23,6 @@ open class BaseActivity : AppCompatActivity() {
                 //You can also use addUnitId(unitId:String)
             .addUnitList(listOf(
                 "float-4343",
-                "float-4344",
-                "float-4345",
                 "float-4346",
                 "float-4347",
                 "float-4348"))

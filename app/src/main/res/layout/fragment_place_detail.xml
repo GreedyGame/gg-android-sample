@@ -65,6 +65,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/ic_tag_bg"
+                android:gravity="center"
                 android:fontFamily="@font/poppins"
                 android:text="Outdoors"
                 android:textAlignment="center"
@@ -129,7 +130,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.4" />
+                app:layout_constraintGuide_percent="0.2" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

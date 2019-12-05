@@ -9,13 +9,30 @@
     tools:context=".showcasemenu.ShowcaseMenu">
 
     <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/contentViewPager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:id="@+id/contentViewPager"
-        app:layout_constraintBottom_toTopOf="@+id/frameLayout3"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/dots_indicator"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+        android:id="@+id/dots_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        app:dotsColor="#0757CF"
+        app:dotsCornerRadius="8dp"
+        app:dotsSize="5dp"
+        app:dotsSpacing="4dp"
+        app:dotsWidthFactor="2.5"
+        app:layout_constraintBottom_toTopOf="@+id/frameLayout3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:progressMode="true"
+        app:selectedDotColor="#0757CF" />
 
     <FrameLayout
         android:id="@+id/frameLayout3"

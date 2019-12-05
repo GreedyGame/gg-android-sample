@@ -56,6 +56,7 @@ class ShowcaseMenu : BaseActivity() {
         with(contentViewPager){
             adapter = ShowcaseViewPagerAdapter()
             setPageTransformer(SizeReductionPageTransformer())
+            dots_indicator.setViewPager2(this)
         }
     }
 

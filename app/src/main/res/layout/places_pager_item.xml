@@ -3,17 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:layout_marginLeft="12dp"
-    android:layout_marginRight="12dp"
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <ImageView
         android:id="@+id/heroImage"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="368dp"
         android:scaleType="fitXY"
+        android:adjustViewBounds="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,11 +26,12 @@
         android:background="@drawable/ic_tag_bg"
         android:text="Outdoors"
         android:textAlignment="center"
+        android:gravity="center"
         android:textColor="#fff"
         android:fontFamily="@font/poppins"
         android:textSize="10sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="@id/heroImage"
+        app:layout_constraintTop_toTopOf="@id/heroImage" />
 
     <TextView
         android:id="@+id/title"
@@ -44,7 +44,7 @@
         android:textColor="#fff"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/location"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="@id/heroImage" />
 
     <TextView
         android:id="@+id/location"
@@ -59,7 +59,7 @@
         android:textColor="#fff"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="@id/heroImage" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
