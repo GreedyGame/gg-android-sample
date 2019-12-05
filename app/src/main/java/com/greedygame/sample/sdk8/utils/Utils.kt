@@ -1,4 +1,4 @@
-package com.greedygame.sample.sdk8.showcase.nongames.travel_app
+package com.greedygame.sample.sdk8.utils
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -36,8 +36,6 @@ fun ImageView.loadAd(unitId:String, greedyGameAgent: GreedyGameAgent, context: C
             picasso.noFade().into(this)
         }
     }
-
-
 
 }
 fun ImageView.loadImage(url:String){

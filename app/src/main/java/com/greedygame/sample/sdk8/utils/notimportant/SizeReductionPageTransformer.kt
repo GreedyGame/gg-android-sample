@@ -1,4 +1,4 @@
-package com.greedygame.sample.sdk8.showcase.nongames.travel_app
+package com.greedygame.sample.sdk8.utils.notimportant
 
 import android.view.View
 import androidx.viewpager2.widget.ViewPager2

@@ -9,9 +9,11 @@
     android:layout_height="wrap_content">
 
    <ImageView
-       android:layout_width="117dp"
+       android:layout_width="wrap_content"
        android:layout_height="117dp"
        android:id="@+id/placeImage"
+       android:adjustViewBounds="true"
+       android:scaleType="fitCenter"
       />
 
 </LinearLayout>

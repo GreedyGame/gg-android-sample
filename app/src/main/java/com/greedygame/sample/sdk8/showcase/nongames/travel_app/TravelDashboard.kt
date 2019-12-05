@@ -19,8 +19,12 @@ import com.greedygame.sample.sdk8.R
 import com.greedygame.sample.sdk8.showcase.nongames.travel_app.adapters.recyclerview.NewPlacesAdapter
 import com.greedygame.sample.sdk8.showcase.nongames.travel_app.adapters.viewpager.PlacesPagerAdapter
 import com.greedygame.sample.sdk8.showcase.nongames.travel_app.fragments.PlaceDetailFragment
+import com.greedygame.sample.sdk8.utils.getCenterCoordinates
+import com.greedygame.sample.sdk8.utils.loadAd
+import com.greedygame.sample.sdk8.utils.loadTextAd
 import com.greedygame.sample.sdk8.utils.notimportant.Rectangle
 import com.greedygame.sample.sdk8.utils.notimportant.SharedPrefManager
+import com.greedygame.sample.sdk8.utils.notimportant.SizeReductionPageTransformer
 import com.takusemba.spotlight.OnSpotlightListener
 import com.takusemba.spotlight.Spotlight
 import com.takusemba.spotlight.Target

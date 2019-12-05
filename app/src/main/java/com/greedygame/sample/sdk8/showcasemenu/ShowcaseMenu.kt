@@ -7,9 +7,9 @@ import android.view.View
 import com.greedygame.android.core.campaign.CampaignStateListener
 import com.greedygame.sample.sdk8.BaseActivity
 import com.greedygame.sample.sdk8.R
-import com.greedygame.sample.sdk8.showcase.nongames.travel_app.SizeReductionPageTransformer
 import com.greedygame.sample.sdk8.showcase.nongames.travel_app.TravelDashboard
 import com.greedygame.sample.sdk8.showcase.nongames.travel_app.adapters.viewpager.ShowcaseViewPagerAdapter
+import com.greedygame.sample.sdk8.utils.notimportant.SizeReductionPageTransformer
 import kotlinx.android.synthetic.main.activity_showcase_menu.*
 
 class ShowcaseMenu : BaseActivity() {
@@ -63,13 +63,11 @@ class ShowcaseMenu : BaseActivity() {
     inner class ShowcaseListener:CampaignStateListener{
         override fun onUnavailable() {
             loader.visibility = View.INVISIBLE
-//            startActivity(Intent(this@ShowcaseMenu,TravelDashboard::class.java))
             hideLoader()
         }
 
         override fun onAvailable(p0: String?) {
             loader.visibility  = View.GONE
-//            startActivity(Intent(this@ShowcaseMenu,TravelDashboard::class.java))
             hideLoader()
 
         }

@@ -8,12 +8,12 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.greedygame.sample.sdk8.BaseActivity
 import com.greedygame.sample.sdk8.R
-import com.greedygame.sample.sdk8.showcase.nongames.travel_app.loadAd
-import com.greedygame.sample.sdk8.showcase.nongames.travel_app.loadImage
 import com.greedygame.sample.sdk8.showcase.nongames.travel_app.model.AdPagerItem
 import com.greedygame.sample.sdk8.showcase.nongames.travel_app.model.BaseItem
 import com.greedygame.sample.sdk8.showcase.nongames.travel_app.model.ItemTypes
 import com.greedygame.sample.sdk8.showcase.nongames.travel_app.model.PlacesPagerItem
+import com.greedygame.sample.sdk8.utils.loadAd
+import com.greedygame.sample.sdk8.utils.loadImage
 import kotlinx.android.synthetic.main.places_pager_ad_item.view.*
 import kotlinx.android.synthetic.main.places_pager_item.view.*
 import kotlinx.android.synthetic.main.places_pager_item.view.container

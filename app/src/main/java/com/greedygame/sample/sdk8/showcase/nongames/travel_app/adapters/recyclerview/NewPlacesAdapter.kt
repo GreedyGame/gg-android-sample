@@ -7,12 +7,12 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.greedygame.sample.sdk8.BaseActivity
 import com.greedygame.sample.sdk8.R
-import com.greedygame.sample.sdk8.showcase.nongames.travel_app.loadImage
-import com.greedygame.sample.sdk8.showcase.nongames.travel_app.loadWithRoundedCorners
 import com.greedygame.sample.sdk8.showcase.nongames.travel_app.model.AdPagerItem
 import com.greedygame.sample.sdk8.showcase.nongames.travel_app.model.BaseItem
 import com.greedygame.sample.sdk8.showcase.nongames.travel_app.model.ItemTypes
 import com.greedygame.sample.sdk8.showcase.nongames.travel_app.model.PlacesPagerItem
+import com.greedygame.sample.sdk8.utils.loadImage
+import com.greedygame.sample.sdk8.utils.loadWithRoundedCorners
 import kotlinx.android.synthetic.main.new_places_rv_item.view.*
 
 class NewPlacesAdapter:RecyclerView.Adapter<NewPlacesAdapter.ViewHolder>() {
@@ -112,7 +112,6 @@ class NewPlacesAdapter:RecyclerView.Adapter<NewPlacesAdapter.ViewHolder>() {
         fun bind(baseItem: BaseItem) {
             when(baseItem.itemType){
                 ItemTypes.AD->{
-                    view.placeImage.scaleType = ImageView.ScaleType.FIT_CENTER
                     view.placeImage.loadWithRoundedCorners(baseItem.value,BaseActivity.mGreedyGameAgent,view.context)
                     view.placeImage.setOnClickListener {
                         BaseActivity.mGreedyGameAgent.showUII(baseItem.value)
@@ -125,10 +124,8 @@ class NewPlacesAdapter:RecyclerView.Adapter<NewPlacesAdapter.ViewHolder>() {
                     view.placeName.text = dataItem.title
                     view.placeImage.loadImage(dataItem.value)
                 }
-
             }
         }
-
     }
 
 }

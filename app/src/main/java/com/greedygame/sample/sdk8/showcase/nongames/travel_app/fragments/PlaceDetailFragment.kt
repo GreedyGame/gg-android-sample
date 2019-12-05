@@ -11,9 +11,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.greedygame.sample.sdk8.BaseActivity
 import com.greedygame.sample.sdk8.R
-import com.greedygame.sample.sdk8.showcase.nongames.travel_app.loadAd
-import com.greedygame.sample.sdk8.showcase.nongames.travel_app.loadImage
 import com.greedygame.sample.sdk8.showcase.nongames.travel_app.model.PlacesPagerItem
+import com.greedygame.sample.sdk8.utils.loadAd
+import com.greedygame.sample.sdk8.utils.loadImage
 import kotlinx.android.synthetic.main.fragment_place_detail.*
 
 private const val ARG_PARAM1 = "param1"
