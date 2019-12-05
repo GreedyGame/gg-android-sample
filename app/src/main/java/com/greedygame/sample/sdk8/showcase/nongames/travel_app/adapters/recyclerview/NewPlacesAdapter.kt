@@ -22,7 +22,7 @@ class NewPlacesAdapter:RecyclerView.Adapter<NewPlacesAdapter.ViewHolder>() {
     private val originalData = mutableListOf(
         PlacesPagerItem(
             ItemTypes.CONTENT,
-            "Causeaway Island",
+            "Causeaway",
             location = "Ireland",
             heroUrl = "https://i.imgur.com/0a6l6n2.png"
 
