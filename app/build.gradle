@@ -4,6 +4,28 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+ext.getUnitsList = {
+    String unitsVar = System.getenv("UNITS")
+    if(unitsVar == null || unitsVar.isEmpty()) {
+        return 'new String[]{"float-1234","float-2345"}'
+    }
+    String[] unitsList = unitsVar.split(":")
+    StringBuilder builder = new StringBuilder()
+    builder.append("new String[]")
+    builder.append("{\"")
+    builder.append(unitsList.join("\",\""))
+    builder.append("\"}")
+    return builder.toString()
+}
+
+
+def APPID = System.getenv("APPID")
+if(APPID == null || APPID.isEmpty()){
+    APPID = "098765"
+}
+def unitsList = getUnitsList()
+
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
@@ -17,7 +39,8 @@ android {
     }
     buildTypes {
         debug{
-            buildConfigField("String","gameId","$System.env.APPID")
+            buildConfigField("String","GAME_ID","\"$APPID\"")
+            buildConfigField("String[]","UNITS","$unitsList")
         }
         release {
             minifyEnabled false
