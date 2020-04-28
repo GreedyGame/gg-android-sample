@@ -19,6 +19,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name="com.greedygame.sample.sdk8.BaseActivity" />
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3940256099942544~3347511713" />
+
         <activity android:name="com.greedygame.sample.sdk8.showcase.nongames.travel_app.TravelDashboard"></activity>
         <activity android:name="com.greedygame.sample.sdk8.showcasemenu.ShowcaseMenu">
             <intent-filter>
@@ -26,28 +31,9 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- GreedyGame Stuff !! -->
-        <activity
-            android:name="com.greedygame.android.core.campaign.uii.web.GGWebActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize|screenLayout|layoutDirection"
-            android:hardwareAccelerated="true"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.GGTransparent" />
-        <activity
-            android:name="com.greedygame.android.core.mediation.greedygame.GGS2SActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize|screenLayout|layoutDirection"
-            android:hardwareAccelerated="true"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.GGTransparent" />
-        <activity
-            android:name="com.greedygame.android.core.mediation.admob.GGAdMobActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize|screenLayout|layoutDirection"
-            android:hardwareAccelerated="true"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.GGTransparent" />
+        </activity>
+        <!-- GreedyGame Stuff !! -->
+        <activity android:name="com.greedygame.core.uii.GreedyGameActivity" />
 
         <uses-library
             android:name="org.apache.http.legacy"

@@ -1,10 +1,14 @@
 package com.greedygame.sample.sdk8.showcase.nongames.travel_app.adapters.recyclerview
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import com.greedygame.commons.utils.Logger
+import com.greedygame.core.adview.interfaces.AdLoadCallback
+import com.greedygame.core.adview.modals.AdRequestErrors
 import com.greedygame.sample.sdk8.BaseActivity
 import com.greedygame.sample.sdk8.R
 import com.greedygame.sample.sdk8.showcase.nongames.travel_app.model.AdPagerItem
@@ -12,7 +16,7 @@ import com.greedygame.sample.sdk8.showcase.nongames.travel_app.model.BaseItem
 import com.greedygame.sample.sdk8.showcase.nongames.travel_app.model.ItemTypes
 import com.greedygame.sample.sdk8.showcase.nongames.travel_app.model.PlacesPagerItem
 import com.greedygame.sample.sdk8.utils.loadImage
-import com.greedygame.sample.sdk8.utils.loadWithRoundedCorners
+import kotlinx.android.synthetic.main.new_places_ad_item.view.*
 import kotlinx.android.synthetic.main.new_places_rv_item.view.*
 
 class NewPlacesAdapter:RecyclerView.Adapter<NewPlacesAdapter.ViewHolder>() {
@@ -74,12 +78,12 @@ class NewPlacesAdapter:RecyclerView.Adapter<NewPlacesAdapter.ViewHolder>() {
      * @see NewPlacesAdapter.filterData
      */
     fun filterData(){
-        data = if(!BaseActivity.mGreedyGameAgent.isCampaignAvailable){
-            originalData.filter {
-                it.itemType == ItemTypes.CONTENT
-            }
-        }else
-            originalData
+//        data = if(!BaseActivity.mGreedyGameAgent.isCampaignAvailable){
+//            originalData.filter {
+//                it.itemType == ItemTypes.CONTENT
+//            }
+//        }else
+            data = originalData
 
         //Be wise on choosing when to call notifyDataSetChanged. Call it in natural places where user modifies the list and
         //it is essential to call this method. Otherwise user experience will be  hampered.
@@ -108,14 +112,11 @@ class NewPlacesAdapter:RecyclerView.Adapter<NewPlacesAdapter.ViewHolder>() {
 
     override fun getItemCount(): Int  = data.size
 
-    class ViewHolder(private val view: View):RecyclerView.ViewHolder(view){
+    class ViewHolder(private val view: View):RecyclerView.ViewHolder(view), AdLoadCallback {
         fun bind(baseItem: BaseItem) {
             when(baseItem.itemType){
                 ItemTypes.AD->{
-                    view.placeImage.loadWithRoundedCorners(baseItem.value,BaseActivity.mGreedyGameAgent,view.context)
-                    view.placeImage.setOnClickListener {
-                        BaseActivity.mGreedyGameAgent.showUII(baseItem.value)
-                    }
+                    view.placeImageAd.loadAd(this)
                 }
                 ItemTypes.CONTENT->{
                     view.placeImage.scaleType = ImageView.ScaleType.FIT_XY
@@ -125,6 +126,26 @@ class NewPlacesAdapter:RecyclerView.Adapter<NewPlacesAdapter.ViewHolder>() {
                     view.placeImage.loadImage(dataItem.value)
                 }
             }
+        }
+
+        override fun onAdLoaded() {
+            Log.d("NewPlacesAdapter","AdLoaded")
+        }
+
+        override fun onAdLoadFailed(cause: AdRequestErrors) {
+            Log.d("NewPlacesAdapter","AdLoadFailed $cause")
+        }
+
+        override fun onUiiOpened() {
+            Log.d("NewPlacesAdapter","Uii Opened")
+        }
+
+        override fun onUiiClosed() {
+            Log.d("NewPlacesAdapter","Uii Closed")
+        }
+
+        override fun onReadyForRefresh() {
+            Log.d("NewPlacesAdapter","Ready for refresh")
         }
     }
 

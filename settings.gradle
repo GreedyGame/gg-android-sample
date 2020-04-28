@@ -1,2 +1,18 @@
 include ':app'
 rootProject.name='Greedy Games Sample SDK8'
+
+include ':greedygame'
+project(':greedygame').projectDir = new File(settingsDir,'../../sdk/sdkx/greedygame')
+
+include ':network'
+project(':network').projectDir = new File(settingsDir,'../../sdk/sdkx/network')
+
+include ':mystique'
+project(':mystique').projectDir = new File(settingsDir,'../../sdk/sdkx/mystique')
+
+include ':mystique2'
+project(':mystique2').projectDir = new File(settingsDir,'../../sdk/sdkx/mystique2')
+
+include ':commons'
+project(':commons').projectDir = new File(settingsDir,'../../sdk/sdkx/commons')
+

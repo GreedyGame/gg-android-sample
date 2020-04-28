@@ -6,13 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import com.greedygame.core.adview.interfaces.AdLoadCallback
+import com.greedygame.core.adview.modals.AdRequestErrors
+import com.greedygame.core.adview.modals.RefreshPolicy
 import com.greedygame.sample.sdk8.BaseActivity
 import com.greedygame.sample.sdk8.R
 import com.greedygame.sample.sdk8.showcase.nongames.travel_app.model.AdPagerItem
 import com.greedygame.sample.sdk8.showcase.nongames.travel_app.model.BaseItem
 import com.greedygame.sample.sdk8.showcase.nongames.travel_app.model.ItemTypes
 import com.greedygame.sample.sdk8.showcase.nongames.travel_app.model.PlacesPagerItem
-import com.greedygame.sample.sdk8.utils.loadAd
 import com.greedygame.sample.sdk8.utils.loadImage
 import kotlinx.android.synthetic.main.places_pager_ad_item.view.*
 import kotlinx.android.synthetic.main.places_pager_item.view.*
@@ -68,13 +70,13 @@ class PlacesPagerAdapter(private val onPageClick:(item:PlacesPagerItem)->Unit):R
      * data will be filtered based on campaign status.
      */
     fun filterData(){
-        Log.d("CAMPAIGN_AVAILABLE","Called with ${BaseActivity.mGreedyGameAgent.isCampaignAvailable}")
-        data = if(!BaseActivity.mGreedyGameAgent.isCampaignAvailable){
-            originalData.filter {
-                it.itemType == ItemTypes.CONTENT
-            }
-        }else
-            originalData
+//        Log.d("CAMPAIGN_AVAILABLE","Called with ${BaseActivity.mGreedyGameAgent.isCampaignAvailable}")
+//        data = if(!BaseActivity.mGreedyGameAgent.isCampaignAvailable){
+//            originalData.filter {
+//                it.itemType == ItemTypes.CONTENT
+//            }
+//        }else
+        data = originalData
         notifyDataSetChanged()
     }
 
@@ -105,25 +107,14 @@ class PlacesPagerAdapter(private val onPageClick:(item:PlacesPagerItem)->Unit):R
 
     override fun getItemCount(): Int  = data.size
 
-    class ViewHolder(val view: View):RecyclerView.ViewHolder(view){
+    class ViewHolder(val view: View):RecyclerView.ViewHolder(view), AdLoadCallback {
         fun bind(
             listItem: BaseItem,
             onPageClick: (item: PlacesPagerItem) -> Unit
         ) {
             when(listItem.itemType){
                 ItemTypes.AD->{
-                    if(BaseActivity.mGreedyGameAgent.isCampaignAvailable) {
-                        view.adUnit.loadAd(
-                            listItem.value,
-                            BaseActivity.mGreedyGameAgent,
-                            view.context
-                        )
-                        view.adUnit.scaleType = ImageView.ScaleType.FIT_CENTER
-                        view.container.setOnClickListener {
-                            BaseActivity.mGreedyGameAgent.showUII(listItem.value)
-                        }
-                    }
-
+                    view.adUnit.loadAd(this)
                 }
                 ItemTypes.CONTENT->{
                     val dataItem = listItem as PlacesPagerItem;
@@ -134,6 +125,26 @@ class PlacesPagerAdapter(private val onPageClick:(item:PlacesPagerItem)->Unit):R
                 }
             }
 
+        }
+
+        override fun onAdLoaded() {
+            Log.d("PagerAd","Ad Loaded")
+        }
+
+        override fun onAdLoadFailed(cause: AdRequestErrors) {
+            Log.d("PagerAd","Ad Load Failed $cause")
+        }
+
+        override fun onUiiOpened() {
+            Log.d("PagerAd","Ad uii opened")
+        }
+
+        override fun onUiiClosed() {
+            Log.d("PagerAd","Ad uii closed")
+        }
+
+        override fun onReadyForRefresh() {
+            Log.d("PagerAd","Ad ready for refresh")
         }
 
     }
