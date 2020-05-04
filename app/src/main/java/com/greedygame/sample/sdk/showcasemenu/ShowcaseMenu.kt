@@ -23,7 +23,7 @@ class ShowcaseMenu : BaseActivity(), GreedyGameAdsEventsListener {
         initViewPager()
         setClickListeners()
         //Registering the event receiver for this class to the BaseClass
-        if(GreedyGameAds.isSdkInitialized) {
+        if(GreedyGameAdManager.isInitialized) {
            hideLoader()
         }
         else {

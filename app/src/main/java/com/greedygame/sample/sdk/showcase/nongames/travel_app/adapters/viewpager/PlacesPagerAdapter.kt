@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.places_pager_item.view.container
 
 class PlacesPagerAdapter(private val onPageClick:(item: PlacesPagerItem)->Unit):RecyclerView.Adapter<PlacesPagerAdapter.ViewHolder>() {
     /***
-   The list originalData represents your apps data for the recyclerview. When loading data from an api, insert ad objects
+   The list data represents your apps data for the recyclerview. When loading data from an api, insert ad objects
    within the data at predetermined positions like every 5th position. In this example it is every 3rd position.
     ** IMPORTANT **
     When displaying admob ads make sure that there is only one unit visible on the screen at any time.
