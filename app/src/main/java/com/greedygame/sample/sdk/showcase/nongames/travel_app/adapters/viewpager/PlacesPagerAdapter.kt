@@ -1,87 +1,68 @@
-package com.greedygame.sample.sdk8.showcase.nongames.travel_app.adapters.viewpager
+package com.greedygame.sample.sdk.showcase.nongames.travel_app.adapters.viewpager
 
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.greedygame.core.adview.interfaces.AdLoadCallback
 import com.greedygame.core.adview.modals.AdRequestErrors
-import com.greedygame.core.adview.modals.RefreshPolicy
-import com.greedygame.sample.sdk8.BaseActivity
+import com.greedygame.sample.sdk.showcase.nongames.travel_app.model.AdPagerItem
+import com.greedygame.sample.sdk.showcase.nongames.travel_app.model.BaseItem
+import com.greedygame.sample.sdk.showcase.nongames.travel_app.model.ItemTypes
+import com.greedygame.sample.sdk.showcase.nongames.travel_app.model.PlacesPagerItem
+import com.greedygame.sample.sdk.utils.loadImage
 import com.greedygame.sample.sdk8.R
-import com.greedygame.sample.sdk8.showcase.nongames.travel_app.model.AdPagerItem
-import com.greedygame.sample.sdk8.showcase.nongames.travel_app.model.BaseItem
-import com.greedygame.sample.sdk8.showcase.nongames.travel_app.model.ItemTypes
-import com.greedygame.sample.sdk8.showcase.nongames.travel_app.model.PlacesPagerItem
-import com.greedygame.sample.sdk8.utils.loadImage
 import kotlinx.android.synthetic.main.places_pager_ad_item.view.*
 import kotlinx.android.synthetic.main.places_pager_item.view.*
 import kotlinx.android.synthetic.main.places_pager_item.view.container
 
-class PlacesPagerAdapter(private val onPageClick:(item:PlacesPagerItem)->Unit):RecyclerView.Adapter<PlacesPagerAdapter.ViewHolder>() {
-
-    /**
-     * This ad unit is inserted in between the data set. You can add multiple ad units based on your requirements.
-     */
-    private val AD_UNIT_4343 = "float-4343"
-
-    private val originalData = listOf(
+class PlacesPagerAdapter(private val onPageClick:(item: PlacesPagerItem)->Unit):RecyclerView.Adapter<PlacesPagerAdapter.ViewHolder>() {
+    /***
+   The list originalData represents your apps data for the recyclerview. When loading data from an api, insert ad objects
+   within the data at predetermined positions like every 5th position. In this example it is every 3rd position.
+    ** IMPORTANT **
+    When displaying admob ads make sure that there is only one unit visible on the screen at any time.
+    */
+    private val data = listOf(
         PlacesPagerItem(
             ItemTypes.CONTENT,
             heroUrl = "https://i.imgur.com/y7v9pCJ.png",
             title = "Antelope\nCanyon",
             location = "Arizona,USA"
-        ), PlacesPagerItem(
+        ),
+        PlacesPagerItem(
             ItemTypes.CONTENT,
             heroUrl = "https://i.imgur.com/JbZ92pE.png",
             title = "Beach\nMaldives",
             location = "Maldives"
-        ), PlacesPagerItem(
+        ),
+        PlacesPagerItem(
             ItemTypes.CONTENT,
             heroUrl = "https://i.imgur.com/ZBFe67z.png",
             title = "Amristar\nFort",
             location = "Amrister,India"
-        ), AdPagerItem(
-            ItemTypes.AD,
-            adValue = AD_UNIT_4343
-        ), PlacesPagerItem(
+        ),
+        AdPagerItem(
+            ItemTypes.AD
+        ),
+        PlacesPagerItem(
             ItemTypes.CONTENT,
             heroUrl = "https://i.imgur.com/T5tPude.png",
             title = "Malibu\nIsland",
             location = "California,USA"
-        ), PlacesPagerItem(
+        ),
+        PlacesPagerItem(
             ItemTypes.CONTENT,
             heroUrl = "https://i.imgur.com/v9CS3W3.png",
             title = "Eiffel\nTower",
             location = "Paris,France"
-        ), AdPagerItem(
-            ItemTypes.AD,
-            adValue = AD_UNIT_4343
+        ),
+        AdPagerItem(
+            ItemTypes.AD
         )
 
     )
-    var data = listOf<BaseItem>()
-
-
-    /**
-     * This function will filter data based on the campaign availability. Each time a refresh is called on GreedyGame agent
-     * data will be filtered based on campaign status.
-     */
-    fun filterData(){
-//        Log.d("CAMPAIGN_AVAILABLE","Called with ${BaseActivity.mGreedyGameAgent.isCampaignAvailable}")
-//        data = if(!BaseActivity.mGreedyGameAgent.isCampaignAvailable){
-//            originalData.filter {
-//                it.itemType == ItemTypes.CONTENT
-//            }
-//        }else
-        data = originalData
-        notifyDataSetChanged()
-    }
-
-
-
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(data[position],onPageClick)
@@ -90,8 +71,8 @@ class PlacesPagerAdapter(private val onPageClick:(item:PlacesPagerItem)->Unit):R
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            LayoutInflater.from(parent.context).inflate(viewType, parent, false))
-
+            LayoutInflater.from(parent.context).inflate(viewType, parent, false)
+        )
     }
 
     /**
@@ -100,7 +81,8 @@ class PlacesPagerAdapter(private val onPageClick:(item:PlacesPagerItem)->Unit):R
      */
     override fun getItemViewType(position: Int): Int {
         return when(data[position].itemType){
-            ItemTypes.AD->{R.layout.places_pager_ad_item}
+            ItemTypes.AD->{
+                R.layout.places_pager_ad_item}
             ItemTypes.CONTENT->{R.layout.places_pager_item}
         }
     }
@@ -117,7 +99,7 @@ class PlacesPagerAdapter(private val onPageClick:(item:PlacesPagerItem)->Unit):R
                     view.adUnit.loadAd(this)
                 }
                 ItemTypes.CONTENT->{
-                    val dataItem = listItem as PlacesPagerItem;
+                    val dataItem = listItem as PlacesPagerItem
                     view.title.text  = dataItem.title
                     view.location.text  = dataItem.location
                     view.heroImage.loadImage(listItem.value)
@@ -132,6 +114,7 @@ class PlacesPagerAdapter(private val onPageClick:(item:PlacesPagerItem)->Unit):R
         }
 
         override fun onAdLoadFailed(cause: AdRequestErrors) {
+            view.adUnit.visibility = View.GONE
             Log.d("PagerAd","Ad Load Failed $cause")
         }
 

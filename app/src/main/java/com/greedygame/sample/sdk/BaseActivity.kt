@@ -1,4 +1,4 @@
-package com.greedygame.sample.sdk8
+package com.greedygame.sample.sdk
 
 import androidx.appcompat.app.AppCompatActivity
 import com.greedygame.core.AppConfig

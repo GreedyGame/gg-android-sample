@@ -1,4 +1,4 @@
-package com.greedygame.sample.sdk8.showcasemenu
+package com.greedygame.sample.sdk.showcasemenu
 
 import android.content.Intent
 import android.net.Uri
@@ -7,12 +7,12 @@ import android.view.View
 import com.greedygame.core.GreedyGameAds
 import com.greedygame.core.interfaces.GreedyGameAdsEventsListener
 import com.greedygame.core.models.InitErrors
-import com.greedygame.sample.sdk8.BaseActivity
-import com.greedygame.sample.sdk8.BaseApplication
+import com.greedygame.sample.sdk.BaseActivity
+import com.greedygame.sample.sdk.GreedyGameAdManager
+import com.greedygame.sample.sdk.showcase.nongames.travel_app.TravelDashboard
+import com.greedygame.sample.sdk.utils.notimportant.SizeReductionPageTransformer
+import com.greedygame.sample.sdk.utils.toast
 import com.greedygame.sample.sdk8.R
-import com.greedygame.sample.sdk8.showcase.nongames.travel_app.TravelDashboard
-import com.greedygame.sample.sdk8.showcase.nongames.travel_app.adapters.viewpager.ShowcaseViewPagerAdapter
-import com.greedygame.sample.sdk8.utils.notimportant.SizeReductionPageTransformer
 import kotlinx.android.synthetic.main.activity_showcase_menu.*
 
 class ShowcaseMenu : BaseActivity(), GreedyGameAdsEventsListener {
@@ -28,7 +28,7 @@ class ShowcaseMenu : BaseActivity(), GreedyGameAdsEventsListener {
         }
         else {
             showLoader()
-            BaseApplication.initAds(this)
+            GreedyGameAdManager.init(this,this)
         }
     }
 
@@ -47,15 +47,16 @@ class ShowcaseMenu : BaseActivity(), GreedyGameAdsEventsListener {
     }
 
     override fun onInitSuccess() {
+            "Init Success".toast(this)
             hideLoader()
     }
 
     override fun onInitFailed(cause: InitErrors) {
-            showLoader()
+        "Ad Init Failed cause $cause".toast(this)
     }
 
     override fun onDestroyed() {
-
+        "SDK Destroyed".toast(this)
     }
     private fun showLoader(){
         buttonBar.visibility = View.GONE

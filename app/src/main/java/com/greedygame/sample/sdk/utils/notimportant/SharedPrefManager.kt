@@ -1,7 +1,7 @@
-package com.greedygame.sample.sdk8.utils.notimportant
+package com.greedygame.sample.sdk.utils.notimportant
 
 import android.content.Context
-import com.greedygame.sample.sdk8.BaseApplication
+import com.greedygame.sample.sdk.BaseApplication
 
 object SharedPrefManager {
     private val sharePref = BaseApplication.appContext?.getSharedPreferences("GG_DEMO_SHARED_PREFRENCE",Context.MODE_PRIVATE)

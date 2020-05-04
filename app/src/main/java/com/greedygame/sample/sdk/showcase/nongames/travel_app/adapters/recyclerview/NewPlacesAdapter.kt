@@ -1,4 +1,4 @@
-package com.greedygame.sample.sdk8.showcase.nongames.travel_app.adapters.recyclerview
+package com.greedygame.sample.sdk.showcase.nongames.travel_app.adapters.recyclerview
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -6,24 +6,25 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import com.greedygame.commons.utils.Logger
 import com.greedygame.core.adview.interfaces.AdLoadCallback
 import com.greedygame.core.adview.modals.AdRequestErrors
-import com.greedygame.sample.sdk8.BaseActivity
+import com.greedygame.sample.sdk.showcase.nongames.travel_app.model.AdPagerItem
+import com.greedygame.sample.sdk.showcase.nongames.travel_app.model.BaseItem
+import com.greedygame.sample.sdk.showcase.nongames.travel_app.model.ItemTypes
+import com.greedygame.sample.sdk.showcase.nongames.travel_app.model.PlacesPagerItem
+import com.greedygame.sample.sdk.utils.loadImage
 import com.greedygame.sample.sdk8.R
-import com.greedygame.sample.sdk8.showcase.nongames.travel_app.model.AdPagerItem
-import com.greedygame.sample.sdk8.showcase.nongames.travel_app.model.BaseItem
-import com.greedygame.sample.sdk8.showcase.nongames.travel_app.model.ItemTypes
-import com.greedygame.sample.sdk8.showcase.nongames.travel_app.model.PlacesPagerItem
-import com.greedygame.sample.sdk8.utils.loadImage
 import kotlinx.android.synthetic.main.new_places_ad_item.view.*
 import kotlinx.android.synthetic.main.new_places_rv_item.view.*
 
 class NewPlacesAdapter:RecyclerView.Adapter<NewPlacesAdapter.ViewHolder>() {
-
-    private val AD_UNIT_FLOAT_4348 = "float-4348"
-
-    private val originalData = mutableListOf(
+    /*
+    The list originalData represents your apps data for the recyclerview. When loading data from an api, insert ad objects
+    within the data at predetermined positions like every 5th position. In this example it is every 3rd position.
+    ** IMPORTANT **
+    When displaying admob ads make sure that there is only one unit visible on the screen at any time.
+     */
+    private val data = mutableListOf(
         PlacesPagerItem(
             ItemTypes.CONTENT,
             "Causeaway",
@@ -39,8 +40,7 @@ class NewPlacesAdapter:RecyclerView.Adapter<NewPlacesAdapter.ViewHolder>() {
 
         ),
         AdPagerItem(
-            ItemTypes.AD,
-            adValue = AD_UNIT_FLOAT_4348
+            ItemTypes.AD
         ),
         PlacesPagerItem(
             ItemTypes.CONTENT,
@@ -50,8 +50,7 @@ class NewPlacesAdapter:RecyclerView.Adapter<NewPlacesAdapter.ViewHolder>() {
 
         ),
         AdPagerItem(
-            ItemTypes.AD,
-            adValue = AD_UNIT_FLOAT_4348
+            ItemTypes.AD
         ),
         PlacesPagerItem(
             ItemTypes.CONTENT,
@@ -68,27 +67,7 @@ class NewPlacesAdapter:RecyclerView.Adapter<NewPlacesAdapter.ViewHolder>() {
 
         )
     )
-    var data = listOf<BaseItem>()
 
-    init {
-        filterData()
-    }
-
-    /**
-     * @see NewPlacesAdapter.filterData
-     */
-    fun filterData(){
-//        data = if(!BaseActivity.mGreedyGameAgent.isCampaignAvailable){
-//            originalData.filter {
-//                it.itemType == ItemTypes.CONTENT
-//            }
-//        }else
-            data = originalData
-
-        //Be wise on choosing when to call notifyDataSetChanged. Call it in natural places where user modifies the list and
-        //it is essential to call this method. Otherwise user experience will be  hampered.
-        notifyDataSetChanged()
-    }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             holder.bind(data[position])
@@ -133,6 +112,7 @@ class NewPlacesAdapter:RecyclerView.Adapter<NewPlacesAdapter.ViewHolder>() {
         }
 
         override fun onAdLoadFailed(cause: AdRequestErrors) {
+            view.placeImageAd.visibility = View.GONE
             Log.d("NewPlacesAdapter","AdLoadFailed $cause")
         }
 
