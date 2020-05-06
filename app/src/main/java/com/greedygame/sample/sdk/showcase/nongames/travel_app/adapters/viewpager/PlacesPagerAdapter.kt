@@ -5,8 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.greedygame.core.adview.interfaces.AdLoadCallback
-import com.greedygame.core.adview.modals.AdRequestErrors
 import com.greedygame.sample.sdk.showcase.nongames.travel_app.model.AdPagerItem
 import com.greedygame.sample.sdk.showcase.nongames.travel_app.model.BaseItem
 import com.greedygame.sample.sdk.showcase.nongames.travel_app.model.ItemTypes
@@ -43,9 +41,9 @@ class PlacesPagerAdapter(private val onPageClick:(item: PlacesPagerItem)->Unit):
             title = "Amristar\nFort",
             location = "Amrister,India"
         ),
-        AdPagerItem(
-            ItemTypes.AD
-        ),
+//        AdPagerItem(
+//            ItemTypes.AD
+//        ),
         PlacesPagerItem(
             ItemTypes.CONTENT,
             heroUrl = "https://i.imgur.com/T5tPude.png",
@@ -57,10 +55,10 @@ class PlacesPagerAdapter(private val onPageClick:(item: PlacesPagerItem)->Unit):
             heroUrl = "https://i.imgur.com/v9CS3W3.png",
             title = "Eiffel\nTower",
             location = "Paris,France"
-        ),
-        AdPagerItem(
-            ItemTypes.AD
         )
+//        AdPagerItem(
+//            ItemTypes.AD
+//        )
 
     )
 
@@ -89,14 +87,14 @@ class PlacesPagerAdapter(private val onPageClick:(item: PlacesPagerItem)->Unit):
 
     override fun getItemCount(): Int  = data.size
 
-    class ViewHolder(val view: View):RecyclerView.ViewHolder(view), AdLoadCallback {
+    class ViewHolder(val view: View):RecyclerView.ViewHolder(view) {
         fun bind(
             listItem: BaseItem,
             onPageClick: (item: PlacesPagerItem) -> Unit
         ) {
             when(listItem.itemType){
                 ItemTypes.AD->{
-                    view.adUnit.loadAd(this)
+
                 }
                 ItemTypes.CONTENT->{
                     val dataItem = listItem as PlacesPagerItem
@@ -109,26 +107,7 @@ class PlacesPagerAdapter(private val onPageClick:(item: PlacesPagerItem)->Unit):
 
         }
 
-        override fun onAdLoaded() {
-            Log.d("PagerAd","Ad Loaded")
-        }
 
-        override fun onAdLoadFailed(cause: AdRequestErrors) {
-            view.adUnit.visibility = View.GONE
-            Log.d("PagerAd","Ad Load Failed $cause")
-        }
-
-        override fun onUiiOpened() {
-            Log.d("PagerAd","Ad uii opened")
-        }
-
-        override fun onUiiClosed() {
-            Log.d("PagerAd","Ad uii closed")
-        }
-
-        override fun onReadyForRefresh() {
-            Log.d("PagerAd","Ad ready for refresh")
-        }
 
     }
 

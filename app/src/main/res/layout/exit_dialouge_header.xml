@@ -5,12 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <com.greedygame.core.adview.GGAdview
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/exitUnit"
-        app:unitId="float-1001"
-        />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

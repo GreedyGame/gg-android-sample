@@ -13,8 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.transition.Slide
 import androidx.viewpager2.widget.ViewPager2
-import com.greedygame.core.adview.interfaces.AdLoadCallback
-import com.greedygame.core.adview.modals.AdRequestErrors
 import com.greedygame.sample.sdk.BaseActivity
 import com.greedygame.sample.sdk.showcase.nongames.travel_app.adapters.recyclerview.NewPlacesAdapter
 import com.greedygame.sample.sdk.showcase.nongames.travel_app.adapters.viewpager.PlacesPagerAdapter
@@ -142,28 +140,6 @@ class TravelDashboard : BaseActivity() {
                  * The layout file is configured in
                  * @see R.layout.exit_dialouge_header
                  */
-                exitUnit.loadAd(object :AdLoadCallback{
-                    override fun onAdLoaded() {
-                        Log.d(TAG,"Exit Ad Loaded")
-                    }
-
-                    override fun onAdLoadFailed(cause: AdRequestErrors) {
-                        Log.d(TAG,"Exit Ad Load Failed - $cause")
-                    }
-
-                    override fun onUiiOpened() {
-                        Log.d(TAG,"Exit Ad uii opened")
-                    }
-
-                    override fun onUiiClosed() {
-                        Log.d(TAG,"Exit Ad uii closed")
-                    }
-
-                    override fun onReadyForRefresh() {
-                        Log.d(TAG,"Exit Ad ready for refresh")
-                    }
-
-                })
             })
             .show()
     }

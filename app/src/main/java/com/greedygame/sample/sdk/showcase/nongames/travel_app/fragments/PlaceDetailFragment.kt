@@ -9,8 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.greedygame.core.adview.interfaces.AdLoadCallback
-import com.greedygame.core.adview.modals.AdRequestErrors
 import com.greedygame.sample.sdk.showcase.nongames.travel_app.model.PlacesPagerItem
 import com.greedygame.sample.sdk.utils.loadImage
 import com.greedygame.sample.sdk8.R
@@ -18,7 +16,7 @@ import kotlinx.android.synthetic.main.fragment_place_detail.*
 
 private const val ARG_PARAM1 = "param1"
 
-class PlaceDetailFragment : Fragment(), AdLoadCallback {
+class PlaceDetailFragment : Fragment() {
     private var param1: PlacesPagerItem? = null
 
     private val alphaValueAnimator = ValueAnimator.ofFloat(1f, 0f)
@@ -45,8 +43,7 @@ class PlaceDetailFragment : Fragment(), AdLoadCallback {
         exitButton.setOnClickListener {
             activity?.onBackPressed()
         }
-        topAdUnit.loadAd(this)
-        bannerUnit.loadAd(this)
+
         param1?.let {
             title.text = it.title.replace("\n", " ")
             location.text = it.location
@@ -60,15 +57,13 @@ class PlaceDetailFragment : Fragment(), AdLoadCallback {
         val visibilityController =
             VisiblityController {
                 if (it == View.VISIBLE) {
-                    topAdUnit?.animate()?.translationY(0f)?.duration = 1000
                 } else {
-                    topAdUnit?.animate()?.translationY(-1000f)?.duration = 1000
                 }
             }
 
         visibilityController.update(View.GONE)
 
-        scrollView?.getHitRect(scrollViewRect);
+        scrollView?.getHitRect(scrollViewRect)
         scrollView?.viewTreeObserver?.addOnScrollChangedListener {
 
             if (ctaAdUnit?.getLocalVisibleRect(scrollViewRect) == true) {
@@ -96,25 +91,6 @@ class PlaceDetailFragment : Fragment(), AdLoadCallback {
             }
     }
 
-    override fun onAdLoaded() {
-        Log.d("DetailPage","Ad Loaded")
-    }
-
-    override fun onAdLoadFailed(cause: AdRequestErrors) {
-        Log.d("DetailPage","Ad Load Failed $cause")
-    }
-
-    override fun onUiiOpened() {
-        Log.d("DetailPage","Ad uii Opened")
-    }
-
-    override fun onUiiClosed() {
-        Log.d("DetailPage","Ad uii closed")
-    }
-
-    override fun onReadyForRefresh() {
-        Log.d("DetailPage","Ad  ready for refresh")
-    }
 
     //Not Important for sdk integration
     data class VisiblityController(

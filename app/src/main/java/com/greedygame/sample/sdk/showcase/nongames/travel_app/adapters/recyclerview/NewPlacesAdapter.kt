@@ -1,20 +1,16 @@
 package com.greedygame.sample.sdk.showcase.nongames.travel_app.adapters.recyclerview
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import com.greedygame.core.adview.interfaces.AdLoadCallback
-import com.greedygame.core.adview.modals.AdRequestErrors
 import com.greedygame.sample.sdk.showcase.nongames.travel_app.model.AdPagerItem
 import com.greedygame.sample.sdk.showcase.nongames.travel_app.model.BaseItem
 import com.greedygame.sample.sdk.showcase.nongames.travel_app.model.ItemTypes
 import com.greedygame.sample.sdk.showcase.nongames.travel_app.model.PlacesPagerItem
 import com.greedygame.sample.sdk.utils.loadImage
 import com.greedygame.sample.sdk8.R
-import kotlinx.android.synthetic.main.new_places_ad_item.view.*
 import kotlinx.android.synthetic.main.new_places_rv_item.view.*
 
 class NewPlacesAdapter:RecyclerView.Adapter<NewPlacesAdapter.ViewHolder>() {
@@ -88,11 +84,11 @@ class NewPlacesAdapter:RecyclerView.Adapter<NewPlacesAdapter.ViewHolder>() {
 
     override fun getItemCount(): Int  = data.size
 
-    class ViewHolder(private val view: View):RecyclerView.ViewHolder(view), AdLoadCallback {
+    class ViewHolder(private val view: View):RecyclerView.ViewHolder(view) {
         fun bind(baseItem: BaseItem) {
             when(baseItem.itemType){
                 ItemTypes.AD->{
-                    view.placeImageAd.loadAd(this)
+
                 }
                 ItemTypes.CONTENT->{
                     view.placeImage.scaleType = ImageView.ScaleType.FIT_XY
@@ -104,26 +100,7 @@ class NewPlacesAdapter:RecyclerView.Adapter<NewPlacesAdapter.ViewHolder>() {
             }
         }
 
-        override fun onAdLoaded() {
-            Log.d("NewPlacesAdapter","AdLoaded")
-        }
 
-        override fun onAdLoadFailed(cause: AdRequestErrors) {
-            view.placeImageAd.visibility = View.GONE
-            Log.d("NewPlacesAdapter","AdLoadFailed $cause")
-        }
-
-        override fun onUiiOpened() {
-            Log.d("NewPlacesAdapter","Uii Opened")
-        }
-
-        override fun onUiiClosed() {
-            Log.d("NewPlacesAdapter","Uii Closed")
-        }
-
-        override fun onReadyForRefresh() {
-            Log.d("NewPlacesAdapter","Ready for refresh")
-        }
     }
 
 }
