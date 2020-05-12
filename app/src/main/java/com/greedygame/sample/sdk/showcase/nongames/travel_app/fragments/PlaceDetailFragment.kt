@@ -45,14 +45,21 @@ class PlaceDetailFragment : Fragment(), AdLoadCallback {
         exitButton.setOnClickListener {
             activity?.onBackPressed()
         }
-        topAdUnit.loadAd(this)
-        bannerUnit.loadAd(this)
+
+//     TODO
+//        topAdUnit.loadAd(this)
+
+
+
         param1?.let {
             title.text = it.title.replace("\n", " ")
             location.text = it.location
             heroImage.loadImage(it.value)
         }
         setupScrollView()
+
+//                bannerUnit.loadAd(this)
+
     }
 
     private fun setupScrollView() {

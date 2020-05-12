@@ -34,7 +34,7 @@ import kotlinx.android.synthetic.main.exit_dialouge_header.view.*
 
 class TravelDashboard : BaseActivity() {
     private val frameHolderId = 2567
-    private lateinit var spotlight:Spotlight;
+    private lateinit var spotlight:Spotlight
 
     private val placesPagerAdapter: PlacesPagerAdapter =
         PlacesPagerAdapter {
@@ -86,7 +86,7 @@ class TravelDashboard : BaseActivity() {
 
                 })
                 .build()
-            spotlight.start()
+//            spotlight.start()
         },1000)
 
     }

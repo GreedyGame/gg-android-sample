@@ -189,6 +189,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:id="@+id/bannerUnit"
+        android:visibility="gone"
         app:unitId="float-4516" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
