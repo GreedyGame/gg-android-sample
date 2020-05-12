@@ -58,7 +58,29 @@ class PlaceDetailFragment : Fragment(), AdLoadCallback {
         }
         setupScrollView()
 
-//                bannerUnit.loadAd(this)
+//      TODO
+//                bannerUnit.loadAd(object : AdLoadCallback {
+//                    override fun onAdLoadFailed(cause: AdRequestErrors) {
+//                        bannerUnit.visibility = View.GONE
+//                    }
+//
+//                    override fun onAdLoaded() {
+//
+//                    }
+//
+//                    override fun onReadyForRefresh() {
+//
+//                    }
+//
+//                    override fun onUiiClosed() {
+//
+//                    }
+//
+//                    override fun onUiiOpened() {
+//
+//                    }
+//
+//                })
 
     }
 
@@ -109,6 +131,7 @@ class PlaceDetailFragment : Fragment(), AdLoadCallback {
 
     override fun onAdLoadFailed(cause: AdRequestErrors) {
         Log.d("DetailPage","Ad Load Failed $cause")
+
     }
 
     override fun onUiiOpened() {
