@@ -49,6 +49,8 @@ class PlaceDetailFragment : Fragment(), AdLoadCallback {
 //     TODO
 //        topAdUnit.loadAd(this)
 
+// TODO
+        setupScrollView()
 
 
         param1?.let {
@@ -56,7 +58,7 @@ class PlaceDetailFragment : Fragment(), AdLoadCallback {
             location.text = it.location
             heroImage.loadImage(it.value)
         }
-        setupScrollView()
+
 
 //      TODO
 //                bannerUnit.loadAd(object : AdLoadCallback {
@@ -89,9 +91,9 @@ class PlaceDetailFragment : Fragment(), AdLoadCallback {
         val visibilityController =
             VisiblityController {
                 if (it == View.VISIBLE) {
-                    topAdUnit?.animate()?.translationY(0f)?.duration = 1000
+//                    topAdUnit?.animate()?.translationY(0f)?.duration = 1000
                 } else {
-                    topAdUnit?.animate()?.translationY(-1000f)?.duration = 1000
+//                    topAdUnit?.animate()?.translationY(-1000f)?.duration = 1000
                 }
             }
 
