@@ -15,6 +15,7 @@ import com.greedygame.sample.sdk.showcase.nongames.travel_app.model.PlacesPagerI
 import com.greedygame.sample.sdk.utils.loadImage
 import com.greedygame.sample.sdk8.R
 import kotlinx.android.synthetic.main.fragment_place_detail.*
+import java.lang.Exception
 
 private const val ARG_PARAM1 = "param1"
 
@@ -63,7 +64,11 @@ class PlaceDetailFragment : Fragment(), AdLoadCallback {
 //      TODO
 //                bannerUnit.loadAd(object : AdLoadCallback {
 //                    override fun onAdLoadFailed(cause: AdRequestErrors) {
-//                        bannerUnit.visibility = View.GONE
+//                        try {
+//                            bannerUnit.visibility = View.GONE
+//                        }catch (e:Exception){
+//
+//                        }
 //                    }
 //
 //                    override fun onAdLoaded() {
