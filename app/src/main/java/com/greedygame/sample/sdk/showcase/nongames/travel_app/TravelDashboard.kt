@@ -64,7 +64,7 @@ class TravelDashboard : BaseActivity() {
         root.addView(frameHolder,layoutParams)
 
         profileImage.setOnClickListener{
-            initCoachmarks()
+//            initCoachmarks()
         }
     }
 
@@ -117,7 +117,7 @@ class TravelDashboard : BaseActivity() {
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
         if(hasFocus && SharedPrefManager.shouldShowCoachmarks){
-            initCoachmarks()
+            //initCoachmarks()
 
         }
     }
