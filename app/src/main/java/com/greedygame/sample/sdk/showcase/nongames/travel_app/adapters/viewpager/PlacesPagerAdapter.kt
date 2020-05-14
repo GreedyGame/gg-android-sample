@@ -38,7 +38,7 @@ class PlacesPagerAdapter(private val onPageClick:(item: PlacesPagerItem)->Unit):
             title = "Amristar\nFort",
             location = "Amrister,India"
         ),
-//        AdPagerItem(ItemTypes.AD),
+        AdPagerItem(ItemTypes.AD),
         PlacesPagerItem(
             ItemTypes.CONTENT,
             heroUrl = "https://i.imgur.com/T5tPude.png",
@@ -51,7 +51,7 @@ class PlacesPagerAdapter(private val onPageClick:(item: PlacesPagerItem)->Unit):
             title = "Eiffel\nTower",
             location = "Paris,France"
         )
-//        , AdPagerItem(ItemTypes.AD)
+        , AdPagerItem(ItemTypes.AD)
 
     )
 
@@ -74,13 +74,13 @@ class PlacesPagerAdapter(private val onPageClick:(item: PlacesPagerItem)->Unit):
 
     override fun getItemViewType(position: Int): Int {
 //        TODO Uncomment
-//        return when(data[position].itemType){
-//            ItemTypes.AD->{
-//                R.layout.places_pager_ad_item}
-//            ItemTypes.CONTENT->{R.layout.places_pager_item}
-//        }
+        return when(data[position].itemType){
+            ItemTypes.AD->{
+                R.layout.places_pager_ad_item}
+            ItemTypes.CONTENT->{R.layout.places_pager_item}
+        }
 //        TODO Comment
-        return R.layout.places_pager_item
+//        return R.layout.places_pager_item
     }
 
     override fun getItemCount(): Int  = data.size
@@ -93,9 +93,9 @@ class PlacesPagerAdapter(private val onPageClick:(item: PlacesPagerItem)->Unit):
         ) {
             when(listItem.itemType){
 //                TODO uncomment
-//                ItemTypes.AD->{
-//                    listener?.let { view.adUnit.loadAd(it) }
-//                }
+                ItemTypes.AD->{
+                    listener?.let { view.adUnit.loadAd(it) }
+                }
                 ItemTypes.CONTENT->{
                     val dataItem = listItem as PlacesPagerItem
                     view.title.text  = dataItem.title

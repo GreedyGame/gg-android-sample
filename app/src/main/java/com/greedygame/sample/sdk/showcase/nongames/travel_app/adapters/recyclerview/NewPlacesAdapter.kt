@@ -39,7 +39,7 @@ class NewPlacesAdapter:RecyclerView.Adapter<NewPlacesAdapter.ViewHolder>() {
             heroUrl = "https://i.imgur.com/uNcRope.png"
 
         ),
-//        AdPagerItem(ItemTypes.AD),
+        AdPagerItem(ItemTypes.AD),
         PlacesPagerItem(
             ItemTypes.CONTENT,
             "River Aga",
@@ -47,7 +47,7 @@ class NewPlacesAdapter:RecyclerView.Adapter<NewPlacesAdapter.ViewHolder>() {
             heroUrl = "https://i.imgur.com/BihS6yR.png"
 
         ),
-//        AdPagerItem(ItemTypes.AD),
+        AdPagerItem(ItemTypes.AD),
         PlacesPagerItem(
             ItemTypes.CONTENT,
             "The Mosque",
@@ -76,12 +76,12 @@ class NewPlacesAdapter:RecyclerView.Adapter<NewPlacesAdapter.ViewHolder>() {
     }
 
     override fun getItemViewType(position: Int): Int {
-//        return when(data[position].itemType){
-//            ItemTypes.AD->{ R.layout.new_places_ad_item}
-//            ItemTypes.CONTENT->{R.layout.new_places_rv_item}
-//
-//        }
-        return  R.layout.new_places_rv_item
+        return when(data[position].itemType){
+            ItemTypes.AD->{ R.layout.new_places_ad_item}
+            ItemTypes.CONTENT->{R.layout.new_places_rv_item}
+
+        }
+//        return  R.layout.new_places_rv_item
 
     }
 
@@ -90,9 +90,9 @@ class NewPlacesAdapter:RecyclerView.Adapter<NewPlacesAdapter.ViewHolder>() {
     class ViewHolder(private val view: View):RecyclerView.ViewHolder(view), AdLoadCallback {
         fun bind(baseItem: BaseItem) {
             when(baseItem.itemType){
-//                ItemTypes.AD->{
-//                    view.placeImageAd.loadAd(this)
-//                }
+                ItemTypes.AD->{
+                    view.placeImageAd.loadAd(this)
+                }
                 ItemTypes.CONTENT->{
                     view.placeImage.scaleType = ImageView.ScaleType.FIT_XY
                     val dataItem = baseItem as PlacesPagerItem

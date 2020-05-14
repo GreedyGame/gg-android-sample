@@ -62,32 +62,32 @@ class PlaceDetailFragment : Fragment(), AdLoadCallback {
 
 
 //      TODO
-//                bannerUnit.loadAd(object : AdLoadCallback {
-//                    override fun onAdLoadFailed(cause: AdRequestErrors) {
-//                        try {
-//                            bannerUnit.visibility = View.GONE
-//                        }catch (e:Exception){
-//
-//                        }
-//                    }
-//
-//                    override fun onAdLoaded() {
-//
-//                    }
-//
-//                    override fun onReadyForRefresh() {
-//
-//                    }
-//
-//                    override fun onUiiClosed() {
-//
-//                    }
-//
-//                    override fun onUiiOpened() {
-//
-//                    }
-//
-//                })
+                bannerUnit.loadAd(object : AdLoadCallback {
+                    override fun onAdLoadFailed(cause: AdRequestErrors) {
+                        try {
+                            bannerUnit.visibility = View.GONE
+                        }catch (e:Exception){
+
+                        }
+                    }
+
+                    override fun onAdLoaded() {
+
+                    }
+
+                    override fun onReadyForRefresh() {
+
+                    }
+
+                    override fun onUiiClosed() {
+
+                    }
+
+                    override fun onUiiOpened() {
+
+                    }
+
+                })
 
     }
 

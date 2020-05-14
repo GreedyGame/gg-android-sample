@@ -24,15 +24,15 @@ class ShowcaseMenu : BaseActivity(), GreedyGameAdsEventsListener {
         setClickListeners()
 
 
-        hideLoader()
+//        hideLoader()
 // TODO
-//        if(GreedyGameAdManager.isInitialized) {
-//           hideLoader()
-//        }
-//        else {
-//            showLoader()
-//            GreedyGameAdManager.init(this,this)
-//        }
+        if(GreedyGameAdManager.isInitialized) {
+           hideLoader()
+        }
+        else {
+            showLoader()
+            GreedyGameAdManager.init(this,this)
+        }
     }
 
     private fun setClickListeners(){
