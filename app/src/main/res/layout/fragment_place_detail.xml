@@ -131,16 +131,16 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
-    <com.greedygame.core.adview.GGAdview
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:id="@+id/topAdUnit"
-        app:unitId="float-1004"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frameLayout2" />
+<!--    <com.greedygame.core.adview.GGAdview-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="16dp"-->
+<!--        android:layout_marginEnd="16dp"-->
+<!--        android:id="@+id/topAdUnit"-->
+<!--        app:unitId="float-4515"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/frameLayout2" />-->
 
     <FrameLayout
         android:id="@+id/frameLayout2"
@@ -189,6 +189,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:id="@+id/bannerUnit"
-        app:unitId="float-1001" />
+        android:visibility="visible"
+        app:unitId="float-4516" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,6 +15,7 @@ import com.greedygame.sample.sdk.showcase.nongames.travel_app.model.PlacesPagerI
 import com.greedygame.sample.sdk.utils.loadImage
 import com.greedygame.sample.sdk8.R
 import kotlinx.android.synthetic.main.fragment_place_detail.*
+import java.lang.Exception
 
 private const val ARG_PARAM1 = "param1"
 
@@ -45,14 +46,49 @@ class PlaceDetailFragment : Fragment(), AdLoadCallback {
         exitButton.setOnClickListener {
             activity?.onBackPressed()
         }
-        topAdUnit.loadAd(this)
-        bannerUnit.loadAd(this)
+
+//     TODO
+//        topAdUnit.loadAd(this)
+
+// TODO
+        setupScrollView()
+
+
         param1?.let {
             title.text = it.title.replace("\n", " ")
             location.text = it.location
             heroImage.loadImage(it.value)
         }
-        setupScrollView()
+
+
+//      TODO
+                bannerUnit.loadAd(object : AdLoadCallback {
+                    override fun onAdLoadFailed(cause: AdRequestErrors) {
+                        try {
+                            bannerUnit.visibility = View.GONE
+                        }catch (e:Exception){
+
+                        }
+                    }
+
+                    override fun onAdLoaded() {
+
+                    }
+
+                    override fun onReadyForRefresh() {
+
+                    }
+
+                    override fun onUiiClosed() {
+
+                    }
+
+                    override fun onUiiOpened() {
+
+                    }
+
+                })
+
     }
 
     private fun setupScrollView() {
@@ -60,9 +96,9 @@ class PlaceDetailFragment : Fragment(), AdLoadCallback {
         val visibilityController =
             VisiblityController {
                 if (it == View.VISIBLE) {
-                    topAdUnit?.animate()?.translationY(0f)?.duration = 1000
+//                    topAdUnit?.animate()?.translationY(0f)?.duration = 1000
                 } else {
-                    topAdUnit?.animate()?.translationY(-1000f)?.duration = 1000
+//                    topAdUnit?.animate()?.translationY(-1000f)?.duration = 1000
                 }
             }
 
@@ -102,6 +138,7 @@ class PlaceDetailFragment : Fragment(), AdLoadCallback {
 
     override fun onAdLoadFailed(cause: AdRequestErrors) {
         Log.d("DetailPage","Ad Load Failed $cause")
+
     }
 
     override fun onUiiOpened() {

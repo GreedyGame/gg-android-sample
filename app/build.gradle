@@ -42,10 +42,12 @@ android {
     }
     buildTypes {
         debug{
+            applicationIdSuffix ".debug"
             buildConfigField("String","GAME_ID","\"$APPID\"")
             buildConfigField("String[]","UNITS","$unitsList")
         }
         release {
+            applicationIdSuffix ".release"
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -64,7 +66,7 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
 
-    implementation "com.greedygame.sdkx:core:0.0.32"
+    implementation "com.greedygame.sdkx:core:0.0.50"
 
     //Dependencies for sdkx
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'

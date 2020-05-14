@@ -22,7 +22,10 @@ class ShowcaseMenu : BaseActivity(), GreedyGameAdsEventsListener {
         setContentView(R.layout.activity_showcase_menu)
         initViewPager()
         setClickListeners()
-        //Registering the event receiver for this class to the BaseClass
+
+
+//        hideLoader()
+// TODO
         if(GreedyGameAdManager.isInitialized) {
            hideLoader()
         }

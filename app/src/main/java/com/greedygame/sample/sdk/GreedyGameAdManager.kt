@@ -14,7 +14,7 @@ object GreedyGameAdManager {
             return
         }
         val appConfig = AppConfig.Builder(context)
-            .withAppId("1234")
+            .withAppId("75512866")
             .build()
         GreedyGameAds.initWith(appConfig, listener)
     }
