@@ -1,12 +1,14 @@
-package com.greedygame.sample.sdk8
+package com.greedygame.sample.sdk
 
-import android.app.Application
 import android.content.Context
+import androidx.multidex.MultiDexApplication
 
-class BaseApplication : Application(){
+class BaseApplication : MultiDexApplication(){
     companion object{
         var appContext: Context? = null
     }
+
+
     override fun onCreate() {
         super.onCreate()
         appContext = applicationContext

@@ -1,8 +1,9 @@
-package com.greedygame.sample.sdk8.showcase.nongames.travel_app
+package com.greedygame.sample.sdk.showcase.nongames.travel_app
 
 import android.app.AlertDialog
 import android.graphics.Color.argb
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -12,18 +13,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.transition.Slide
 import androidx.viewpager2.widget.ViewPager2
-import com.greedygame.android.core.campaign.CampaignStateListener
-import com.greedygame.sample.sdk8.BaseActivity
+import com.greedygame.core.adview.interfaces.AdLoadCallback
+import com.greedygame.core.adview.modals.AdRequestErrors
+import com.greedygame.sample.sdk.BaseActivity
+import com.greedygame.sample.sdk.showcase.nongames.travel_app.adapters.recyclerview.NewPlacesAdapter
+import com.greedygame.sample.sdk.showcase.nongames.travel_app.adapters.viewpager.PlacesPagerAdapter
+import com.greedygame.sample.sdk.showcase.nongames.travel_app.fragments.PlaceDetailFragment
+import com.greedygame.sample.sdk.utils.getCenterCoordinates
+import com.greedygame.sample.sdk.utils.notimportant.Rectangle
+import com.greedygame.sample.sdk.utils.notimportant.SharedPrefManager
+import com.greedygame.sample.sdk.utils.notimportant.SizeReductionPageTransformer
 import com.greedygame.sample.sdk8.R
-import com.greedygame.sample.sdk8.showcase.nongames.travel_app.adapters.recyclerview.NewPlacesAdapter
-import com.greedygame.sample.sdk8.showcase.nongames.travel_app.adapters.viewpager.PlacesPagerAdapter
-import com.greedygame.sample.sdk8.showcase.nongames.travel_app.fragments.PlaceDetailFragment
-import com.greedygame.sample.sdk8.utils.getCenterCoordinates
-import com.greedygame.sample.sdk8.utils.loadAd
-import com.greedygame.sample.sdk8.utils.loadTextAd
-import com.greedygame.sample.sdk8.utils.notimportant.Rectangle
-import com.greedygame.sample.sdk8.utils.notimportant.SharedPrefManager
-import com.greedygame.sample.sdk8.utils.notimportant.SizeReductionPageTransformer
 import com.takusemba.spotlight.OnSpotlightListener
 import com.takusemba.spotlight.Spotlight
 import com.takusemba.spotlight.Target
@@ -32,36 +32,27 @@ import com.takusemba.spotlight.shape.Circle
 import kotlinx.android.synthetic.main.activity_travel_dashboard.*
 import kotlinx.android.synthetic.main.exit_dialouge_header.view.*
 
-class TravelDashboard : BaseActivity(),
-    PlaceDetailFragment.OnFragmentInteractionListener {
-    private val ggEventListener = TravelDashboardCampaignListener()
+class TravelDashboard : BaseActivity() {
     private val frameHolderId = 2567
-    private val AD_UNIT_4347 = "float-4347"
-    private lateinit var spotlight:Spotlight;
+    private lateinit var spotlight:Spotlight
 
-    val placesPagerAdapter:PlacesPagerAdapter = PlacesPagerAdapter{
-        val fragment =
-            PlaceDetailFragment.newInstance(it);
-        fragment.enterTransition = Slide(Gravity.BOTTOM)
-        supportFragmentManager
-            .beginTransaction().replace(frameHolderId,fragment).addToBackStack("").commit()
-    }
+    private val placesPagerAdapter: PlacesPagerAdapter =
+        PlacesPagerAdapter {
+            val fragment =
+                PlaceDetailFragment.newInstance(
+                    it
+                );
+            fragment.enterTransition = Slide(Gravity.BOTTOM)
+            supportFragmentManager
+                .beginTransaction().replace(frameHolderId, fragment).addToBackStack("").commit()
+        }
 
-    val newPlacesAdapter = NewPlacesAdapter()
+    private val newPlacesAdapter = NewPlacesAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_travel_dashboard)
         initViews()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        mBaseCampaignStateListener.receiver = ggEventListener
-    }
-
-    override fun onPause() {
-        super.onPause()
     }
 
     private fun initViews(){
@@ -72,12 +63,8 @@ class TravelDashboard : BaseActivity(),
         val layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT)
         root.addView(frameHolder,layoutParams)
 
-        tabAd.loadTextAd(AD_UNIT_4347)
-        tabAd.setOnClickListener {
-            mGreedyGameAgent.showUII(AD_UNIT_4347)
-        }
         profileImage.setOnClickListener{
-            initCoachmarks()
+//            initCoachmarks()
         }
     }
 
@@ -85,10 +72,9 @@ class TravelDashboard : BaseActivity(),
         scrollView.smoothScrollTo(0,0)
         profileImage.postDelayed({
             val restartCoachmarksTarget = getRestartCoachmarksTarget()
-            val textAdTarget = getTextAdTarget()
             val pagerAdTarget = getPagerAdTarget()
             spotlight = Spotlight.Builder(this)
-                .setTargets(textAdTarget,pagerAdTarget,restartCoachmarksTarget)
+                .setTargets(pagerAdTarget,restartCoachmarksTarget)
                 .setOnSpotlightListener(object : OnSpotlightListener {
                     override fun onEnded() {
                         SharedPrefManager.shouldShowCoachmarks = false
@@ -100,19 +86,8 @@ class TravelDashboard : BaseActivity(),
 
                 })
                 .build()
-            spotlight.start()
+//            spotlight.start()
         },1000)
-
-    }
-
-
-    private fun getTextAdTarget():Target{
-        val viewPosition = linearLayout.getCenterCoordinates()
-        return Target.Builder()
-            .setAnchor(viewPosition[0].toFloat(),viewPosition[1].toFloat())
-            .setShape(Rectangle(linearLayout,10))
-            .setOverlay(LayoutInflater.from(this).inflate(R.layout.coach_marks_textad_target,null))
-            .build()
 
     }
 
@@ -142,7 +117,7 @@ class TravelDashboard : BaseActivity(),
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
         if(hasFocus && SharedPrefManager.shouldShowCoachmarks){
-            initCoachmarks()
+            //initCoachmarks()
 
         }
     }
@@ -162,10 +137,33 @@ class TravelDashboard : BaseActivity(),
                 callback()
             }
             .setCustomTitle(LayoutInflater.from(this).inflate(R.layout.exit_dialouge_header,null).apply {
-                adUnit.loadAd("float-4346",mGreedyGameAgent,this@TravelDashboard)
-                adUnit.setOnClickListener {
-                    mGreedyGameAgent.showUII("float-4346")
-                }
+
+                /***
+                 * The layout file is configured in
+                 * @see R.layout.exit_dialouge_header
+                 */
+                exitUnit.loadAd(object :AdLoadCallback{
+                    override fun onAdLoaded() {
+                        Log.d(TAG,"Exit Ad Loaded")
+                    }
+
+                    override fun onAdLoadFailed(cause: AdRequestErrors) {
+                        Log.d(TAG,"Exit Ad Load Failed - $cause")
+                    }
+
+                    override fun onUiiOpened() {
+                        Log.d(TAG,"Exit Ad uii opened")
+                    }
+
+                    override fun onUiiClosed() {
+                        Log.d(TAG,"Exit Ad uii closed")
+                    }
+
+                    override fun onReadyForRefresh() {
+                        Log.d(TAG,"Exit Ad ready for refresh")
+                    }
+
+                })
             })
             .show()
     }
@@ -180,34 +178,10 @@ class TravelDashboard : BaseActivity(),
     private fun setupViewpager(){
         with(suggestionsPager){
             adapter = placesPagerAdapter
-            placesPagerAdapter.filterData()
             orientation = ViewPager2.ORIENTATION_HORIZONTAL
             setPageTransformer(SizeReductionPageTransformer())
             dotsIndicator.setViewPager2(this)
         }
     }
 
-    /**
-     * TravelDashboardCampaignListener listens to event from SDK via BaseCampaignListener and filters data
-     * to the list with or without ads if campaign is available or not available respectively.
-     */
-    private inner class TravelDashboardCampaignListener:CampaignStateListener{
-        fun callFilters(){
-            tabAd.loadTextAd(AD_UNIT_4347)
-            placesPagerAdapter.filterData()
-            newPlacesAdapter.filterData()
-        }
-        override fun onUnavailable() {
-            callFilters()
-        }
-
-        override fun onAvailable(p0: String?) {
-            callFilters()
-        }
-
-        override fun onError(p0: String?) {
-            callFilters()
-        }
-
-    }
 }

@@ -1,4 +1,4 @@
-package com.greedygame.sample.sdk8.showcase.nongames.travel_app.adapters.viewpager
+package com.greedygame.sample.sdk.showcasemenu
 
 import android.view.LayoutInflater
 import android.view.View
@@ -43,7 +43,8 @@ class ShowcaseViewPagerAdapter:RecyclerView.Adapter<ShowcaseViewPagerAdapter.Vie
 
     class ViewHolder(val view: View):RecyclerView.ViewHolder(view){
         fun bind(
-            listItem: ShowCasePagerItem) {
+            listItem: ShowCasePagerItem
+        ) {
             view.targetIcon.setImageDrawable(ContextCompat.getDrawable(view.context,listItem.icon))
             view.target.text = listItem.title
             view.targetDesc.text = listItem.desc

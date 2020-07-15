@@ -1,43 +1,38 @@
-package com.greedygame.sample.sdk8.showcasemenu
+package com.greedygame.sample.sdk.showcasemenu
 
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import com.greedygame.android.core.campaign.CampaignStateListener
-import com.greedygame.sample.sdk8.BaseActivity
+import com.greedygame.core.GreedyGameAds
+import com.greedygame.core.interfaces.GreedyGameAdsEventsListener
+import com.greedygame.core.models.InitErrors
+import com.greedygame.sample.sdk.BaseActivity
+import com.greedygame.sample.sdk.GreedyGameAdManager
+import com.greedygame.sample.sdk.showcase.nongames.travel_app.TravelDashboard
+import com.greedygame.sample.sdk.utils.notimportant.SizeReductionPageTransformer
+import com.greedygame.sample.sdk.utils.toast
 import com.greedygame.sample.sdk8.R
-import com.greedygame.sample.sdk8.showcase.nongames.travel_app.TravelDashboard
-import com.greedygame.sample.sdk8.showcase.nongames.travel_app.adapters.viewpager.ShowcaseViewPagerAdapter
-import com.greedygame.sample.sdk8.utils.notimportant.SizeReductionPageTransformer
 import kotlinx.android.synthetic.main.activity_showcase_menu.*
 
-class ShowcaseMenu : BaseActivity() {
-
-    private val ggEventListener = ShowcaseListener()
+class ShowcaseMenu : BaseActivity(), GreedyGameAdsEventsListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_showcase_menu)
         initViewPager()
         setClickListeners()
-        //Registering the event receiver for this class to the BaseClass
-        if(isGreedyGameAgentInitialised) {
+
+
+//        hideLoader()
+// TODO
+        if(GreedyGameAdManager.isInitialized) {
            hideLoader()
         }
         else {
             showLoader()
-            initAds()
+            GreedyGameAdManager.init(this,this)
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        mBaseCampaignStateListener.receiver = ggEventListener
-    }
-
-    override fun onPause() {
-        super.onPause()
     }
 
     private fun setClickListeners(){
@@ -53,6 +48,19 @@ class ShowcaseMenu : BaseActivity() {
             startActivity(webIntent)
         }
     }
+
+    override fun onInitSuccess() {
+            "Init Success".toast(this)
+            hideLoader()
+    }
+
+    override fun onInitFailed(cause: InitErrors) {
+        "Ad Init Failed cause $cause".toast(this)
+    }
+
+    override fun onDestroyed() {
+        "SDK Destroyed".toast(this)
+    }
     private fun showLoader(){
         buttonBar.visibility = View.GONE
         loader.visibility = View.VISIBLE
@@ -67,22 +75,5 @@ class ShowcaseMenu : BaseActivity() {
             setPageTransformer(SizeReductionPageTransformer())
             dots_indicator.setViewPager2(this)
         }
-    }
-
-
-    inner class ShowcaseListener:CampaignStateListener{
-        override fun onUnavailable() {
-            hideLoader()
-        }
-
-        override fun onAvailable(p0: String?) {
-            hideLoader()
-
-        }
-
-        override fun onError(p0: String?) {
-            loader.visibility  = View.GONE
-        }
-
     }
 }

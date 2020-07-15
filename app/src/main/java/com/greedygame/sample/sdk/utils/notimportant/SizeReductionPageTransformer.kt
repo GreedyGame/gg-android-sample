@@ -1,4 +1,4 @@
-package com.greedygame.sample.sdk8.utils.notimportant
+package com.greedygame.sample.sdk.utils.notimportant
 
 import android.view.View
 import androidx.viewpager2.widget.ViewPager2
