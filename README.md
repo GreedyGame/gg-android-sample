@@ -1,6 +1,6 @@
 # GreedyGame Sample App
 
-SDKX Version 0.0.80
+SDKX Version  [ ![Download](https://api.bintray.com/packages/greedygame/SDKX/com.greedygame.core/images/download.svg) ](https://bintray.com/greedygame/SDKX/com.greedygame.core/_latestVersion)
 
 Last Updated 17th Sep 2020
 
