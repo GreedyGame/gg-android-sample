@@ -188,6 +188,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:adsMaxHeight="50dp"
         android:id="@+id/bannerUnit"
         android:visibility="visible"
         app:unitId="float-4706" />
