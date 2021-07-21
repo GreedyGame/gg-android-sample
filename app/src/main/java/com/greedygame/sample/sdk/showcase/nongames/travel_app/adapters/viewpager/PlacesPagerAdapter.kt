@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.greedygame.core.adview.interfaces.AdLoadCallback
-import com.greedygame.core.adview.modals.AdRequestErrors
+import com.greedygame.core.adview.general.AdLoadCallback
+import com.greedygame.core.models.general.AdErrors
 import com.greedygame.sample.sdk.showcase.nongames.travel_app.model.AdPagerItem
 import com.greedygame.sample.sdk.showcase.nongames.travel_app.model.BaseItem
 import com.greedygame.sample.sdk.showcase.nongames.travel_app.model.ItemTypes
@@ -109,7 +109,7 @@ class PlacesPagerAdapter(private val onPageClick:(item: PlacesPagerItem)->Unit):
 
     }
     inner class AdEventListener(private val position:Int):AdLoadCallback{
-        override fun onAdLoadFailed(cause: AdRequestErrors) {
+        override fun onAdLoadFailed(cause: AdErrors) {
             data.removeAt(position)
             notifyItemRemoved(position)
         }

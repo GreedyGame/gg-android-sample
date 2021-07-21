@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.view.View
 import com.greedygame.core.GreedyGameAds
 import com.greedygame.core.interfaces.GreedyGameAdsEventsListener
-import com.greedygame.core.models.InitErrors
+import com.greedygame.core.models.general.InitErrors
 import com.greedygame.sample.sdk.BaseActivity
 import com.greedygame.sample.sdk.GreedyGameAdManager
 import com.greedygame.sample.sdk.showcase.nongames.travel_app.TravelDashboard
@@ -58,9 +58,6 @@ class ShowcaseMenu : BaseActivity(), GreedyGameAdsEventsListener {
         "Ad Init Failed cause $cause".toast(this)
     }
 
-    override fun onDestroyed() {
-        "SDK Destroyed".toast(this)
-    }
     private fun showLoader(){
         buttonBar.visibility = View.GONE
         loader.visibility = View.VISIBLE

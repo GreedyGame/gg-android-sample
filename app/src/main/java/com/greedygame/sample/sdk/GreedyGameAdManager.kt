@@ -7,7 +7,7 @@ import com.greedygame.core.interfaces.GreedyGameAdsEventsListener
 
 object GreedyGameAdManager {
     val isInitialized:Boolean
-        get()  = GreedyGameAds.isSdkInitialized
+        get()  = GreedyGameAds.isSdkInitialized()
 
     fun init(context: Context, listener: GreedyGameAdsEventsListener? = null) {
         if (isInitialized) {
@@ -15,6 +15,7 @@ object GreedyGameAdManager {
         }
         val appConfig = AppConfig.Builder(context)
             .withAppId("89221032")
+            .enableFacebookAds(true)
             .build()
         GreedyGameAds.initWith(appConfig, listener)
     }

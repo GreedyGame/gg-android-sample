@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import com.greedygame.core.adview.interfaces.AdLoadCallback
-import com.greedygame.core.adview.modals.AdRequestErrors
+import com.greedygame.core.adview.general.AdLoadCallback
+import com.greedygame.core.models.general.AdErrors
 import com.greedygame.sample.sdk.showcase.nongames.travel_app.model.AdPagerItem
 import com.greedygame.sample.sdk.showcase.nongames.travel_app.model.BaseItem
 import com.greedygame.sample.sdk.showcase.nongames.travel_app.model.ItemTypes
@@ -107,7 +107,7 @@ class NewPlacesAdapter:RecyclerView.Adapter<NewPlacesAdapter.ViewHolder>() {
             Log.d("NewPlacesAdapter","AdLoaded")
         }
 
-        override fun onAdLoadFailed(cause: AdRequestErrors) {
+        override fun onAdLoadFailed(cause: AdErrors) {
             view.placeImageAd.visibility = View.GONE
             Log.d("NewPlacesAdapter","AdLoadFailed $cause")
         }

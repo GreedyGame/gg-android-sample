@@ -182,7 +182,7 @@
             android:src="@drawable/ic_chevron_down" />
     </FrameLayout>
 
-    <com.greedygame.core.adview.GGAdview
+    <com.greedygame.core.adview.general.GGAdview
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.transition.Slide
 import androidx.viewpager2.widget.ViewPager2
-import com.greedygame.core.adview.interfaces.AdLoadCallback
-import com.greedygame.core.adview.modals.AdRequestErrors
+import com.greedygame.core.adview.general.AdLoadCallback
+import com.greedygame.core.models.general.AdErrors
 import com.greedygame.sample.sdk.BaseActivity
 import com.greedygame.sample.sdk.showcase.nongames.travel_app.adapters.recyclerview.NewPlacesAdapter
 import com.greedygame.sample.sdk.showcase.nongames.travel_app.adapters.viewpager.PlacesPagerAdapter
@@ -147,7 +147,7 @@ class TravelDashboard : BaseActivity() {
                         Log.d(TAG,"Exit Ad Loaded")
                     }
 
-                    override fun onAdLoadFailed(cause: AdRequestErrors) {
+                    override fun onAdLoadFailed(cause: AdErrors) {
                         Log.d(TAG,"Exit Ad Load Failed - $cause")
                     }
 

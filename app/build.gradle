@@ -29,17 +29,23 @@ def unitsList = getUnitsList()
 
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.2"
+    compileSdkVersion 30
+    buildToolsVersion "29.0.3"
     defaultConfig {
         applicationId "com.greedygame.sample.sdk8"
         minSdkVersion 18
-        targetSdkVersion 29
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     buildTypes {
         debug{
             applicationIdSuffix ".debug"
@@ -66,21 +72,24 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
 
-    implementation "com.greedygame.sdkx:core:0.0.87"
+    implementation "com.greedygame.sdkx:core:0.0.89"
 
     //Dependencies for sdkx
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation "androidx.palette:palette:1.0.0"
-    implementation("com.squareup.moshi:moshi-kotlin:1.9.2")
-    kapt("com.squareup.moshi:moshi-kotlin-codegen:1.9.2")
+    implementation("com.squareup.moshi:moshi-kotlin:1.12.0")
+    kapt("com.squareup.moshi:moshi-kotlin-codegen:1.12.0")
     //Optional
     implementation 'com.google.android.gms:play-services-location:17.0.0'
 
-    implementation 'com.google.android.gms:play-services-ads:19.1.0'
+    implementation 'com.google.android.gms:play-services-ads:20.2.0'
+
+    implementation 'androidx.annotation:annotation:1.2.0'
+    implementation 'com.facebook.android:audience-network-sdk:6.5.1'
 
     implementation 'com.squareup.picasso:picasso:2.5.2'
-    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'jp.wasabeef:picasso-transformations:2.2.1'
     implementation 'androidx.viewpager2:viewpager2:1.0.0'

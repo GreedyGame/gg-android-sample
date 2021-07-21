@@ -9,8 +9,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.greedygame.core.adview.interfaces.AdLoadCallback
-import com.greedygame.core.adview.modals.AdRequestErrors
+import com.greedygame.core.adview.general.AdLoadCallback
+import com.greedygame.core.models.general.AdErrors
 import com.greedygame.sample.sdk.showcase.nongames.travel_app.model.PlacesPagerItem
 import com.greedygame.sample.sdk.utils.loadImage
 import com.greedygame.sample.sdk8.R
@@ -63,7 +63,7 @@ class PlaceDetailFragment : Fragment(), AdLoadCallback {
 
 //      TODO
                 bannerUnit.loadAd(object : AdLoadCallback {
-                    override fun onAdLoadFailed(cause: AdRequestErrors) {
+                    override fun onAdLoadFailed(cause: AdErrors) {
                         try {
                             bannerUnit.visibility = View.GONE
                         }catch (e:Exception){
@@ -136,7 +136,7 @@ class PlaceDetailFragment : Fragment(), AdLoadCallback {
         Log.d("DetailPage","Ad Loaded")
     }
 
-    override fun onAdLoadFailed(cause: AdRequestErrors) {
+    override fun onAdLoadFailed(cause: AdErrors) {
         Log.d("DetailPage","Ad Load Failed $cause")
 
     }
