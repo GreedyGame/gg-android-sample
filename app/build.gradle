@@ -29,11 +29,11 @@ def unitsList = getUnitsList()
 
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 31
     buildToolsVersion "29.0.3"
     defaultConfig {
         applicationId "com.greedygame.sample.sdk8"
-        minSdkVersion 18
+        minSdkVersion 19
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -72,7 +72,7 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
 
-    implementation "com.greedygame.sdkx:core:0.0.99"
+    implementation "com.greedygame.sdkx:core:0.1.0"
 
     //Dependencies for sdkx
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
@@ -83,7 +83,7 @@ dependencies {
     //Optional
     implementation 'com.google.android.gms:play-services-location:17.0.0'
 
-    implementation 'com.google.android.gms:play-services-ads:20.2.0'
+    implementation 'com.google.android.gms:play-services-ads:22.0.0'
 
     implementation 'androidx.annotation:annotation:1.2.0'
     implementation 'com.facebook.android:audience-network-sdk:6.5.1'
